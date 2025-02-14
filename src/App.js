@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { operations } from './store';
 import ScrollReset from './components/common/ScrollReset';
@@ -43,29 +43,29 @@ class App extends Component {
     return <Router>
       <ScrollReset>
         <Breadcrumb />
-        <Route path="*" component={Tracking} />
-        <Switch>
-          <Route path="/" exact component={MainNavigation} />
-          <Route path="/basics" exact component={NavigationBasics} />
-          <Route path='/basics/vowels' component={Vowels} />
-          <Route path='/basics/consonants' exact component={ConsonantNavigation} />
-          <Route path='/basics/consonants/confusion/drill-:visibleConfusion(\d)' component= {Confusion} />
-          <Route path="/basics/consonants/review" component={Consonants} />
-          <Route path='/basics/consonants/confusion' component= {Confusion} />
-          <Route path="/basics/tones" exact component={TonesNavigation} />
-          <Route path="/basics/tones/classes" exact component={ConsonantClasses} />
-          <Route path="/basics/tones/classes/drill/:type(all|mid-high)" component={ConsonantClasses} />
-          <Route path="/basics/tones/rules" exact component={ToneRules} />
-          <Route path="/basics/tones/rules/drill/:stage(\d+)" component={ToneRules} />
+        <Routes>
+          <Route path="*" element={<Tracking/>} />
+          <Route path="/" element={<MainNavigation />} />
+          <Route path="/basics" element={<NavigationBasics /> } />
+          <Route path='/basics/vowels' element={<Vowels/>} />
+          <Route path='/basics/consonants' element={<ConsonantNavigation/>} />
+          <Route path='/basics/consonants/confusion/drill-:visibleConfusion(\d)' element={<Confusion/>} />
+          <Route path="/basics/consonants/review" element={<Consonants/>} />
+          <Route path='/basics/consonants/confusion' element={<Confusion/>} />
+          <Route path="/basics/tones" element={<TonesNavigation/>} />
+          <Route path="/basics/tones/classes" element={<ConsonantClasses/>} />
+          <Route path="/basics/tones/classes/drill/:type(all|mid-high)" element={<ConsonantClasses/>} />
+          <Route path="/basics/tones/rules" element={<ToneRules/>} />
+          <Route path="/basics/tones/rules/drill/:stage(\d+)" element={<ToneRules/>} />
 
-          <Route path='/progress' component={Progress} />
-          <Route path='/practice/:type?' component={Practice} />
-          <Route path='/test' exact component={TestSelector} />
-          <Route path='/test/:type(overdue|current)' component={Test} />
+          <Route path='/progress' element={<Progress/>} />
+          <Route path='/practice/:type?' element={<Practice/>} />
+          <Route path='/test' element={<TestSelector/>} />
+          <Route path='/test/:type(overdue|current)' element={<Test/>} />
 
-          <Route path="/settings" component={Settings} />
-          <Route component={NotFound} />
-        </Switch>
+          <Route path="/settings" element={<Settings/>} />
+          <Route element={<NotFound/>} />
+        </Routes>
       </ScrollReset>
     </Router>;
   }

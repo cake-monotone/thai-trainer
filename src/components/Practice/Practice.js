@@ -1,41 +1,46 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Preview from './Preview';
 import CardContainer from './CardContainer';
 
-class Practice extends Component {
-    componentDidMount() {
-        const { practiceWordLimit, seedPractice, words } = this.props;
+const Practice = ({
+  practiceWordLimit,
+  seedPractice,
+  words,
+  closePractice,
+  ...props
+}) => {
+  const { type } = useParams();
+  const subview = type || null;
 
-        seedPractice(words, practiceWordLimit);
-    }
-    componentWillUnmount() {
-        this.props.closePractice();
-    }
+  useEffect(() => {
+    seedPractice(words, practiceWordLimit);
+    return () => {
+      closePractice();
+    };
+  }, [seedPractice, words, practiceWordLimit, closePractice]);
 
-    render() {
-        const { match: { params }, ...props } = this.props;
-        const subview = params.type || null;
-
-        return (<div className="practice">
-        <Link className="test-button" to="/test/current">Test now <span className="icon">〉</span></Link>
-        <h1>Practice</h1>
-        {
-            subview === 'full' ? <CardContainer { ...props } />
-            : <Preview { ...props } />
-        }
-    </div>);
-
-    }
-}
+  return (
+    <div className="practice">
+      <Link className="test-button" to="/test/current">
+        Test now <span className="icon">〉</span>
+      </Link>
+      <h1>Practice</h1>
+      {subview === 'full' ? (
+        <CardContainer {...props} />
+      ) : (
+        <Preview {...props} />
+      )}
+    </div>
+  );
+};
 
 Practice.propTypes = {
-    match: PropTypes.shape({ params: PropTypes.object.isRequired }).isRequired,
-    practiceWordLimit: PropTypes.number.isRequired,
-    seedPractice: PropTypes.func.isRequired,
-    closePractice: PropTypes.func.isRequired,
-    words: PropTypes.array.isRequired,
+  practiceWordLimit: PropTypes.number.isRequired,
+  seedPractice: PropTypes.func.isRequired,
+  closePractice: PropTypes.func.isRequired,
+  words: PropTypes.array.isRequired,
 };
 
 export default Practice;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getCurrentPracticeWords, getOutstandingWords, getMasteredWords } from '../../services/Leitner';
 import { getDayOfEpoch } from '../../services/Utils';
 
@@ -54,4 +54,4 @@ TestSelector.propTypes = {
     words: PropTypes.array.isRequired,
 };
 
-export default withRouter(TestSelector);
+export default TestSelector;

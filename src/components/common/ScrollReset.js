@@ -1,19 +1,19 @@
-import { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-class ScrollReset extends Component {
-    componentDidUpdate(prev) {
-        if (this.props.location !== prev.location) window.scrollTo(0, 0);
-    }
-    render() {
-        return this.props.children;
-    }
-}
+const ScrollReset = ({ children }) => {
+  const location = useLocation();
 
-ScrollReset.propTypes = {
-    location: PropTypes.object.isRequired,
-    children: PropTypes.array,
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return children;
 };
 
-export default withRouter(ScrollReset);
+ScrollReset.propTypes = {
+  children: PropTypes.node,
+};
+
+export default ScrollReset;

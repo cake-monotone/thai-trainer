@@ -1,4 +1,3 @@
-/* global speechSynthesis */
 import { loadVoices, saveVoices } from './Persistence';
 import PropTypes from 'prop-types';
 
@@ -14,87 +13,105 @@ let englishVoiceName = null;
 let rate = 1;
 
 export const saveSettings = async () => {
-    let englishVoiceName = englishVoice ? englishVoice.name : null;
-    let thaiVoiceName = thaiVoice ? thaiVoice.name : null;
-    await saveVoices({ englishVoiceName, thaiVoiceName, rate });
+  let englishVoiceName = englishVoice ? englishVoice.name : null;
+  let thaiVoiceName = thaiVoice ? thaiVoice.name : null;
+  await saveVoices({ englishVoiceName, thaiVoiceName, rate });
 };
 
-export const init = () => new Promise(async (resolve) => {
-    const voiceSettings = await loadVoices();
-    ({ englishVoiceName = null, thaiVoiceName = null, rate = rate } = voiceSettings || {});
+export const init = () =>
+  new Promise((resolve) => {
+    loadVoices().then((voiceSettings) => {
+      ({
+        englishVoiceName = null,
+        thaiVoiceName = null,
+        rate = rate,
+      } = voiceSettings || {});
 
-    const processVoices = () => {
+      const processVoices = () => {
         const rxEnglishVoiceTest = /^en/i;
         const rxThaiVoiceTest = /^th/i;
         const allVoices = speechSynthesis.getVoices();
 
-        thaiVoices = allVoices.filter(({lang}) => rxThaiVoiceTest.test(lang));
-        englishVoices = allVoices.filter(({lang}) => rxEnglishVoiceTest.test(lang));
+        thaiVoices = allVoices.filter(({ lang }) => rxThaiVoiceTest.test(lang));
+        englishVoices = allVoices.filter(({ lang }) =>
+          rxEnglishVoiceTest.test(lang)
+        );
 
-        englishVoice = englishVoices.find(({name}) => name === englishVoiceName) || englishVoices[0];
+        englishVoice =
+          englishVoices.find(({ name }) => name === englishVoiceName) ||
+          englishVoices[0];
         englishVoiceName = englishVoice ? englishVoice.name : null;
-        thaiVoice = englishVoices.find(({name}) => name === thaiVoiceName) || thaiVoices[0];
+        thaiVoice =
+          englishVoices.find(({ name }) => name === thaiVoiceName) ||
+          thaiVoices[0];
         thaiVoiceName = thaiVoice ? thaiVoice.name : null;
 
         resolve();
-    };
-    if (speechSynthesis.getVoices().length) processVoices();
-    else speechSynthesis.onvoiceschanged = processVoices;
-});
+      };
+      if (speechSynthesis.getVoices().length) processVoices();
+      else speechSynthesis.onvoiceschanged = processVoices;
+    });
+  });
 
-const findVoice = (voices, newVoiceName) => voices.find(({ name }) => newVoiceName === name);
+const findVoice = (voices, newVoiceName) =>
+  voices.find(({ name }) => newVoiceName === name);
 export const setThaiVoice = ({ name }) => {
-    thaiVoice = findVoice(thaiVoices, name) || thaiVoice;
-    saveSettings();
+  thaiVoice = findVoice(thaiVoices, name) || thaiVoice;
+  saveSettings();
 };
 export const setEnglishVoice = ({ name }) => {
-    englishVoice = findVoice(englishVoices, name) || englishVoice;
-    saveSettings();
+  englishVoice = findVoice(englishVoices, name) || englishVoice;
+  saveSettings();
 };
 export const setRate = (newRate) => {
-    rate = newRate;
-    saveSettings();
+  rate = newRate;
+  saveSettings();
 };
-export const say = (language, word, cancelCurrent = true) => new Promise(resolve => {
+export const say = (language, word, cancelCurrent = true) =>
+  new Promise((resolve) => {
     if (cancelCurrent) speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance();
     if (language === LANGUAGE_ENGLISH) {
-        utterance.lang = englishVoice.lang;
-        utterance.voice = englishVoice;
-        utterance.rate = 1;
-        utterance.text = word.term;
+      utterance.lang = englishVoice.lang;
+      utterance.voice = englishVoice;
+      utterance.rate = 1;
+      utterance.text = word.term;
     } else {
-        utterance.lang = thaiVoice.lang;
-        utterance.voice = thaiVoice;
-        utterance.rate = rate;
-        utterance.text = word.thai || word.altThai;
+      utterance.lang = thaiVoice.lang;
+      utterance.voice = thaiVoice;
+      utterance.rate = rate;
+      utterance.text = word.thai || word.altThai;
     }
 
     utterance.onend = resolve;
     speechSynthesis.speak(utterance);
-});
+  });
 
 export const sayWords = (language, texts) => {
-    const next = async (texts) => {
-        let [ current, ...rest ] = texts;
-        await say(language, language === LANGUAGE_ENGLISH ? { term: current } : { thai: current } );
-        if (rest.length) next(rest);
-    };
-    if (texts) next(texts);
+  const next = async (texts) => {
+    let [current, ...rest] = texts;
+    await say(
+      language,
+      language === LANGUAGE_ENGLISH ? { term: current } : { thai: current }
+    );
+    if (rest.length) next(rest);
+  };
+  if (texts) next(texts);
 };
 
 export const voicePropType = PropTypes.shape({
-    lang: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+  lang: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 });
 
-export const isPronunciation = property => property === 'ipa' || property === 'paiboon';
+export const isPronunciation = (property) =>
+  property === 'ipa' || property === 'paiboon';
 
 export const getAll = () => ({
-    thaiVoices,
-    englishVoices,
-    thaiVoice,
-    englishVoice,
-    rate
+  thaiVoices,
+  englishVoices,
+  thaiVoice,
+  englishVoice,
+  rate,
 });

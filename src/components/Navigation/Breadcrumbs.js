@@ -1,21 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Route, withRouter } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import BreadcrumbsItem, { urlToTitle } from './BreadcrumbsItem';
 
-const Breadcrumbs = ({ location: { pathname } }) => {
-    if (pathname === '/' || !urlToTitle(pathname)) return null;
+const Breadcrumbs = () => {
+  const { pathname } = useLocation();
 
-    return <div className="breadcrumbs">
-        <ul className='container'>
-            <li><Link to="/">Home</Link></li>
-            <Route path='/:path' component={BreadcrumbsItem} />
-        </ul>
-    </div>;
+  if (pathname === '/' || !urlToTitle(pathname)) return null;
+
+  return (
+    <div className="breadcrumbs">
+      <ul className="container">
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <BreadcrumbsItem path={pathname} />
+      </ul>
+    </div>
+  );
 };
+
 Breadcrumbs.propTypes = {
-    location: PropTypes.shape({ location: PropTypes.object }),
+  location: PropTypes.shape({ pathname: PropTypes.string }),
 };
 
-
-export default withRouter(Breadcrumbs);
+export default Breadcrumbs;
