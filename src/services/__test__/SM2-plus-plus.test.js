@@ -1,4 +1,4 @@
-import { getDayOfEpoch, calculateSuperMemo2Algorithm, calculateSuperMemo5Algorithm, calculateDifficulty, calculateEasiness, getEasiness } from '../SM2-plus-plus';
+import { getDayOfEpoch, getEasiness } from '../SM2-plus-plus';
 
 describe('SM2-plus service', () => {
     it('calculates easiness', () => {

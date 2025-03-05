@@ -1,26 +1,25 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { moveArrayItem } from "../../services/Utils";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { DndContext } from "@dnd-kit/core";
-import { Droppable as NewDroppable } from "./Droppable";
-import { Draggable as NewDraggable } from "./Draggable";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { moveArrayItem } from '../../services/Utils';
+import { DndContext } from '@dnd-kit/core';
+import { Droppable } from './Droppable';
+import { Draggable } from './Draggable';
 
 const grid = 8;
 const getListStyle = (isDraggingOver) => ({
-  borderWidth: "1px",
-  borderStyle: "solid",
-  borderColor: isDraggingOver ? "#999" : "#ddd",
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: isDraggingOver ? '#999' : '#ddd',
   padding: grid,
   width: 250,
 });
 const getItemStyle = (isDragging, draggableStyle) => ({
-  userSelect: "none",
+  userSelect: 'none',
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
-  background: isDragging ? "#73959a" : "#c8dbde",
-  color: isDragging ? "#fff" : "initial",
-  textAlign: "center",
+  background: isDragging ? '#73959a' : '#c8dbde',
+  color: isDragging ? '#fff' : 'initial',
+  textAlign: 'center',
   ...draggableStyle,
 });
 
@@ -29,7 +28,7 @@ export default class DragDropSorter extends Component {
     super(...args);
 
     this.state = {
-      children: ["Pronunciation", "English", "Thai"],
+      children: ['Pronunciation', 'English', 'Thai'],
     };
     this.onDragEnd = this.onDragEnd.bind(this);
   }
@@ -45,40 +44,6 @@ export default class DragDropSorter extends Component {
   render() {
     return (
       <DndContext onDragEnd={this.onDragEnd}>
-        <NewDroppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              {this.props.order.map((childOrder, index) => (
-                <NewDraggable
-                  key={childOrder}
-                  draggableId={childOrder}
-                  index={index}
-                >
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      {childOrder}
-                    </div>
-                  )}
-                </NewDraggable>
-              ))}
-            </div>
-          )}
-        </NewDroppable>
-      </DndContext>
-    );
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div
@@ -109,7 +74,7 @@ export default class DragDropSorter extends Component {
             </div>
           )}
         </Droppable>
-      </DragDropContext>
+      </DndContext>
     );
   }
 }
