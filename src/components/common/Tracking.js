@@ -1,23 +1,19 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { operations } from '../../store';
+import { useLocation } from 'react-router-dom';
 
-class Tracking extends Component {
-    componentDidUpdate(prevProps) {
-        const { trackRouteChange, location: { pathname } } = this.props;
-        const { location: { pathname: oldPathname }} = prevProps;
+const Tracking = ({ trackRouteChange }) => {
+    const { pathname } = useLocation();
+    useEffect(() => {
+        trackRouteChange(pathname);
+    }, [pathname, trackRouteChange]);
 
-        if (pathname !== oldPathname) trackRouteChange(pathname);
-    }
-
-    render() {
-        return null;
-    }
-}
+    return null;
+};
 
 Tracking.propTypes = {
-    location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
     trackRouteChange: PropTypes.func.isRequired,
 };
 

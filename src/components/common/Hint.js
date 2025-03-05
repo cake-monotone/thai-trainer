@@ -4,7 +4,7 @@ import { classNames } from '../../services/Utils';
 
 import '../../styles/css/Hint.css';
 
-const Hint = ({ children, toggleHint, title, hintVisible }) => {
+const Hint = ({ children, toggleHint, title = 'Hint', hintVisible }) => {
     const classes = classNames({
         hint: true,
         visible: hintVisible
@@ -33,9 +33,6 @@ Hint.propTypes = {
     toggleHint: PropTypes.func.isRequired,
     title: PropTypes.string,
     hintVisible: PropTypes.bool.isRequired,
-};
-Hint.defaultProps = {
-    title: 'Hint'
 };
 
 export default Hint;

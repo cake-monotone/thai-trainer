@@ -61,7 +61,7 @@ class App extends Component {
           <Route path='/progress' element={<Progress/>} />
           <Route path='/practice/:type?' element={<Practice/>} />
           <Route path='/test' element={<TestSelector/>} />
-          <Route path='/test/:type(overdue|current)' element={<Test/>} />
+          <Route path='/test/:type' element={<Test/>} />
 
           <Route path="/settings" element={<Settings/>} />
           <Route element={<NotFound/>} />
