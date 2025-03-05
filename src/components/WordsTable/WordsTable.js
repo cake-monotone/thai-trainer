@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProgressItem from './ProgressItem';
 
-const WordsTable = ({pronunciationType, showProgress, visibleWords}) => {
+const WordsTable = ({pronunciationType, showProgress=true, visibleWords}) => {
     const items = visibleWords.map(word => <ProgressItem word={ word } key={ word.id } pronunciationType={ pronunciationType } showProgress={ showProgress } />);
     const className = showProgress ? 'words-table' : 'words-table no-progress';
     return <div className={ className }>
@@ -26,9 +26,6 @@ WordsTable.propTypes = {
     pronunciationType: PropTypes.string.isRequired,
     showProgress: PropTypes.bool,
     visibleWords: PropTypes.array.isRequired,
-};
-WordsTable.defaultProps = {
-    showProgress: true
 };
 
 export default WordsTable;
