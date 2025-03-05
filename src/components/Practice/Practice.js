@@ -4,22 +4,20 @@ import { Link, useParams } from 'react-router-dom';
 import Preview from './Preview';
 import CardContainer from './CardContainer';
 
-const Practice = ({
-  practiceWordLimit,
-  seedPractice,
-  words,
-  closePractice,
-  ...props
-}) => {
+const Practice = (props) => {
+  const { practiceWordLimit, seedPractice, words, closePractice } = props;
   const { type } = useParams();
   const subview = type || null;
 
   useEffect(() => {
     seedPractice(words, practiceWordLimit);
+  }, [seedPractice, practiceWordLimit]);
+
+  useEffect(() => {
     return () => {
       closePractice();
     };
-  }, [seedPractice, words, practiceWordLimit, closePractice]);
+  }, [closePractice]);
 
   return (
     <div className="practice">

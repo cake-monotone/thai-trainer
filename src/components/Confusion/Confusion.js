@@ -1,40 +1,54 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ConfusionPicker from './ConfusionPicker';
 import ConfusionDetail from './ConfusionDetail';
 import Drill from './Drill';
+import { useParams } from 'react-router-dom';
 
-class Confusion extends Component {
-    componentDidMount() {
-        this.props.initializeConfusion();
-    }
-    componentWillUnmount() {
-        this.props.clearSounds();
-    }
+const Confusion = (props) => {
+  const { initializeConfusion, clearSounds } = props;
+  useEffect(() => {
+    initializeConfusion();
 
-    render() {
-        const { confusions, visibleConfusion, showConfusionByIndex, confusionLoaded, match: { params={} } } = this.props;
+    return () => {
+      clearSounds();
+    };
+  }, [initializeConfusion, clearSounds]);
 
-        if (confusions.length === 0) return null;
-        if (!isNaN(params.visibleConfusion)) return <Drill { ...this.props } />;
+  const params = useParams();
 
-        return <div className="confusion">
-            <h1>Easily confused consonants</h1>
-            <ConfusionPicker confusions={ confusions } visibleConfusion={ visibleConfusion } showConfusionByIndex={ showConfusionByIndex } />
+  const {
+    confusions,
+    visibleConfusion,
+    showConfusionByIndex,
+    confusionLoaded,
+  } = props;
 
-            { confusionLoaded ? <ConfusionDetail { ...this.props } /> : null }
-        </div>;
-    }
-}
+  if (confusions.length === 0) return null;
+  if (!isNaN(params.visibleConfusion))
+    return <Drill params={params} {...props} />;
+
+  return (
+    <div className="confusion">
+      <h1>Easily confused consonants</h1>
+      <ConfusionPicker
+        confusions={confusions}
+        visibleConfusion={visibleConfusion}
+        showConfusionByIndex={showConfusionByIndex}
+      />
+
+      {confusionLoaded ? <ConfusionDetail {...props} /> : null}
+    </div>
+  );
+};
 
 Confusion.propTypes = {
-    confusionLoaded: PropTypes.bool.isRequired,
-    confusions: PropTypes.array,
-    match: PropTypes.shape({ params: PropTypes.object }).isRequired,
-    visibleConfusion: PropTypes.number,
+  confusionLoaded: PropTypes.bool.isRequired,
+  confusions: PropTypes.array,
+  visibleConfusion: PropTypes.number,
 
-    clearSounds: PropTypes.func.isRequired,
-    initializeConfusion: PropTypes.func.isRequired,
-    showConfusionByIndex: PropTypes.func.isRequired,
+  clearSounds: PropTypes.func.isRequired,
+  initializeConfusion: PropTypes.func.isRequired,
+  showConfusionByIndex: PropTypes.func.isRequired,
 };
 export default Confusion;

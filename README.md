@@ -4,8 +4,7 @@ This project is currently under irregular development. At the moment, migration 
 
 The goal of this repository is improving maintainability and implemnt new features.
 
-NOTE: The maintainer has no frontend-experience. Always welcome to suggest and contribution.
-**NOTE:** The maintainer has no frontend experience. Contributions and suggestions are always welcome.
+**NOTE:** The maintainer (me) has no frontend experience. Contributions and suggestions are always welcome.
 
 Below is the original `README.md` from the source repository.
 

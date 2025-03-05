@@ -22,7 +22,7 @@ class Drill extends PureComponent {
         super(...args);
 
         const [props] = args;
-        const {consonants, match: { params }, confusions, pronunciationType, showConfusionByIndex } = props;
+        const {consonants, params, confusions, pronunciationType, showConfusionByIndex } = props;
 
         const visibleConfusion = parseInt(params.visibleConfusion, 10);
         if (!confusions[visibleConfusion]) {
@@ -128,7 +128,7 @@ Drill.propTypes = {
     confusions: PropTypes.array.isRequired,
     consonants: PropTypes.object.isRequired,
     hintVisible: PropTypes.bool.isRequired,
-    match: PropTypes.shape({ params: PropTypes.object }).isRequired,
+    params: PropTypes.object.isRequired,
     pronunciationType: PropTypes.string.isRequired,
 
     showConfusionByIndex: PropTypes.func.isRequired,
