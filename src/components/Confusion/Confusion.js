@@ -25,8 +25,9 @@ const Confusion = (props) => {
   } = props;
 
   if (confusions.length === 0) return null;
-  if (!isNaN(params.visibleConfusion))
+  if (!isNaN(params.visibleConfusion)) {
     return <Drill params={params} {...props} />;
+  }
 
   return (
     <div className="confusion">

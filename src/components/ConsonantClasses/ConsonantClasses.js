@@ -14,22 +14,24 @@ const lowChars = lowCharacters.split('');
 const midChars = midCharacters.split('');
 const highChars = highCharacters.split('');
 
-const ConsonantClasses = ({
-  confusions,
-  initializeConsonants,
-//   initializeTones,
-}) => {
+const ConsonantClasses = (props) => {
+  const { type } = useParams();
+  const {
+    confusions,
+    initializeConsonants,
+  //   initializeTones,
+  } = props;
+
   useEffect(() => {
     // initializeTones();
     initializeConsonants();
   }, [initializeConsonants]);
 
-  const { type } = useParams();
   return (
     <div className="consonant-classes">
       {type === undefined ? (
         <Review
-          {...this.props}
+          {...props}
           low={lowChars}
           mid={midChars}
           high={highChars}

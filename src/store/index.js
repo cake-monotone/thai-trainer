@@ -1,6 +1,10 @@
+// The store configuration is completely disorganized.
+// It's also written in an outdated style, which resulted from migration from an old version.
+// TODO: Refactor store/index.js
+
 import { combineReducers, applyMiddleware, compose } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
+import { thunk } from 'redux-thunk';
 
 import { reducer as view, operations as viewOperations } from './view';
 import { reducer as voice, operations as voiceOperations } from './voice';
