@@ -1,68 +1,54 @@
 {
   "name": "thai-trainer",
   "description": "A assistant for learning written Thai",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "homepage": "https://thai.fatfx.com/",
   "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src/",
+    "preview": "vite preview"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/scriptfoundry/thai-trainer.git"
+    "url": "https://github.com/cake-monotone/thai-trainer.git"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@redux-beacon/debounce-event": "^1.0.2",
-    "@redux-beacon/google-analytics-gtag": "^1.0.5",
+    "@redux-beacon/google-analytics-gtag": "^1.1.0",
     "@redux-beacon/logger": "^1.0.0",
-    "@reduxjs/toolkit": "^2.5.1",
+    "@reduxjs/toolkit": "^2.6.1",
     "fast-levenshtein": "^3.0.0",
     "history": "^5.3.0",
-    "localforage": "^1.7.3",
+    "localforage": "^1.10.0",
     "rc-slider": "^11.1.8",
-    "react": "18.3.1",
-    "react-circular-progressbar": "^2.0.3",
-    "react-dom": "18.3.1",
+    "react": "^18.3.1",
+    "react-circular-progressbar": "^2.2.0",
+    "react-dom": "^18.3.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.3.0",
-    "react-scripts": "^5.0.1",
-    "react-transition-group": "^4.3.0",
+    "react-transition-group": "^4.4.5",
     "redux": "^5.0.1",
     "redux-beacon": "^2.1.0",
-    "redux-thunk": "3.1.0"
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.9",
-    "@babel/eslint-parser": "^7.26.8",
-    "@babel/runtime": "^7.26.9",
-    "@craco/craco": "^7.1.0",
-    "eslint": "^9.20.1",
+    "@eslint/js": "^9.21.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "eslint": "^9.21.0",
     "eslint-plugin-jest": "^28.11.0",
-    "eslint-plugin-react": "^7.37.4",
-    "globals": "^16.0.0",
-    "prop-types": "^15.8.1"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test --env=jsdom",
-    "test:notify": "craco test --env=jsdom --notify",
-    "eject": "craco eject",
-    "css": "node-sass src/styles/sass/ -o src/styles/css",
-    "css:build": "node-sass src/styles/sass/ -o src/styles/css --output-style compressed",
-    "css:watch": "node-sass src/styles/sass/ -o src/styles/css --watch",
-    "lint": "eslint src/"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "sass": "^1.85.1",
+    "sass-migrator": "^2.3.1",
+    "vite": "^6.2.0"
   }
 }

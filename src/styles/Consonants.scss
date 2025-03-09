@@ -1,0 +1,36 @@
+@use 'constants';
+
+.consonants {
+    @include constants.container_n_section();
+
+    .list div {
+        display: flex;
+        font-size: 2em;
+        @include constants.columns(true);
+
+        span:nth-child(1) {
+            @include constants.column(1, 2);
+        }
+        span:nth-child(2) {
+            @include constants.column(2);
+        }
+        span:nth-child(3) {
+            @include constants.column(3);
+        }
+        span:nth-child(4) {
+            @include constants.column(1);
+        }
+        button {
+            // position: absolute;
+            margin: 0;
+        }
+    }
+
+    nav {
+        @include constants.tab-header();
+    }
+
+    .list div span:last-child {
+        text-align: right;
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "/": "Home",
+  "/basics": "Basics",
+  "/basics/vowels": "Vowels",
+  "/basics/consonants": "Consonants",
+  "/basics/consonants/review": "Review",
+  "/basics/consonants/confusion": "Easily confused consonants",
+  "/basics/tones": "Tones",
+  "/basics/tones/classes": "Consonant classes",
+  "/basics/tones/rules": "Tone rules",
+  "/practice": "Practice",
+  "/practice/full": "Full",
+  "/practice/sounds-only": "Sounds Only",
+  "/test": "Test",
+  "/test/overdue": "Scheduled words",
+  "/test/current": "Practice words",
+  "/progress": "Progress",
+  "/settings": "Settings"
+}

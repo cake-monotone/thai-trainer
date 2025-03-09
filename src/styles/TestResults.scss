@@ -1,0 +1,53 @@
+@use "sass:color";
+@use 'constants';
+
+.test-results {
+    @include constants.section();
+
+    .result {
+        display: flex;
+        flex-direction: row;
+        padding: .5em 0;
+        border-bottom: 1px solid constants.$color-faint;
+        line-height: 2em;
+        text-align: left;
+
+        > * {
+            flex: 1;
+            text-align: center;
+        }
+
+        > :first-child {
+            text-align: left;
+            font-size: 1.4em;
+        }
+
+        &.header {
+            font-weight: bold;
+            border-top-width: 0;
+        }
+    }
+    section {
+        @include constants.section();
+        @include constants.contents-centered();
+    }
+    .save-button {
+        @include constants.large-button(constants.$primary-theme);
+        width: 50%;
+    }
+    .incorrect {
+        background-color: #f44040;
+        border-color: color.adjust(#f44040, $lightness: -10%);
+    }
+    .correct {
+        background-color: #12ac12;
+        border-color: color.adjust(#12ac12, $lightness: -10%);
+    }
+    span {
+        @include constants.icon-square();
+        border-radius: .2em;
+        color: constants.$white;
+        height: 1.5em;
+        width: 1.5em;
+    }
+}

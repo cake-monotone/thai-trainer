@@ -1,0 +1,113 @@
+@use "sass:color";
+@use 'constants';
+
+.tone-rules {
+    @include constants.container_n_section();
+
+    table.filtered {
+        td {
+            transition: all 300ms;
+            background-color: color.adjust(constants.$color-faint, $lightness: 10%);
+            color: constants.$color-faint;
+
+        }
+    }
+    table.c-1 td.c-1,
+    table.c-2 td.c-2,
+    table.c-3 td.c-3,
+    table.c-4 td.c-4,
+    table.c-5 td.c-5,
+    table.c-6 td.c-6,
+    table.c-7 td.c-7,
+    table.c-8 td.c-8,
+    table.c-9 td.c-9,
+    table.c-10 td.c-10 {
+        opacity: 1;
+        background-color: constants.$color-highlight;
+        color: black;
+    }
+
+    table {
+        $border-radius: .5em;
+        width: 100%;
+        margin-bottom: 2em;
+
+        thead tr:first-child :first-child { border-top-left-radius: $border-radius; }
+        thead tr:first-child :last-child { border-top-right-radius: $border-radius; }
+        tbody tr:last-child :first-child { border-bottom-left-radius: $border-radius; }
+        tbody tr:last-child :last-child { border-bottom-right-radius: $border-radius; }
+
+        &, tbody, tbody tr:last-child { border-bottom-right-radius: $border-radius; }
+
+        thead tr:first-child {
+            font-size: 1.4em;
+            font-weight: ligher;
+        }
+    }
+    th {
+        background-color: constants.$color-faint;
+
+        &.low { background-color: rgb(170, 170, 253); }
+        &.mid { background-color: rgb(240, 224, 151); }
+        &.high { background-color: rgb(240, 145, 145); }
+    }
+    tr :first-child {
+        width: 20%;
+    }
+    tbody td { 
+        border: 1px solid constants.$color-faint;
+    }
+    th, td {
+        text-align: center;
+        padding: .5em 1em;
+    }
+    td {
+        font-size: 1.5em;
+        font-weight: lighter;
+    }
+    .drill {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+
+        h1 {
+            width: 3em;
+            text-align: center;
+            margin-left: -1.75em;
+        }
+        .answer-0 { margin-left: -3.75em; }
+        .answer-1 { margin-left: 2.35em; }
+
+    }
+    .drill-buttons {
+        h3 {
+            font-size: 1.2em;
+            font-weight: lighter;
+            height: 1em;
+        }
+        h4 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+            margin: .5em 0;
+            a {
+                flex: 0;
+                margin-bottom: .25em;
+            }
+        }
+        .button {
+            @include constants.medium-button(constants.$primary-theme);
+            margin: 0 .25em;
+        }
+    }
+    .progress-bar {
+        @include constants.progress-bar;
+    }
+}

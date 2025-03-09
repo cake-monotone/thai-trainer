@@ -1,0 +1,102 @@
+@use 'constants';
+
+.settings {
+    @include constants.container_n_section();
+
+    > section {
+        border: 1px solid constants.$color-faint;
+    }
+    section {
+        @include constants.section();
+        background-color: #fff;
+        border-radius: 1em;
+        margin-bottom: 1em;
+    }
+
+    h3 {
+        font-size: 2em;
+    }
+    .voice-selector {
+        margin-bottom: 3em;
+        &:last-child { margin-bottom: 0; }
+
+        button {
+            @include constants.button();
+            border-radius: .2em;
+            margin: .2em;
+    
+            &.selected {
+                @include constants.customize-button(constants.$primary-theme);
+                cursor: default;
+            }
+        }
+    }
+    .voices {
+        @include constants.contents-centered();
+    }
+
+    .practice-order {
+        text-align: center;
+
+        .all-at-once {
+            margin: 1em 0;
+        }
+        .practice-order-selector {
+            text-align: center;
+
+            > div {
+                display: inline-block;
+            }
+        }
+    }
+    .reset-progress {
+        p {
+            text-align: center;
+        }
+        .danger {
+            background-color: constants.$color-danger;
+            color: white;
+        }
+    }
+
+    .samples {
+       @include constants.container();
+
+        .sample {
+            display: flex;
+
+            > div {
+                flex: 4;
+                text-align: center;
+            }
+            > :nth-child(2) {
+                flex: 1;
+            }
+            .disabled-button {
+                @include constants.text-button();
+                background-color: transparent;
+                cursor: default;
+                font-weight: bold;
+            }
+        }
+
+        &.ipa { @include constants.highlight-column(1); }
+        &.paiboon { @include constants.highlight-column(3); }
+    }
+    .button {
+        @include constants.large-button(constants.$primary-theme);
+        width: 50%;
+        margin-left: 25%;
+    }
+    .button-group {
+        @include constants.button-group(768px);
+
+        @include constants.forHandheld() {
+            display: flex;
+        }
+
+        .selected {
+            cursor: default;
+        }
+    }
+}
