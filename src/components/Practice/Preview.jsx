@@ -7,21 +7,31 @@ import WordsTable from '../WordsTable';
 
 const getFilteredWordsList = memoize(filterByRoughStatus);
 
-const Preview = ({ practiceWordLimit, words}) => {
-    const visibleWords = getFilteredWordsList(words, getDayOfEpoch(new Date()), [STATUS_PRACTICE]).slice(0, practiceWordLimit);
+const Preview = ({ practiceWordLimit, words }) => {
+  const visibleWords = getFilteredWordsList(words, getDayOfEpoch(new Date()), [
+    STATUS_PRACTICE,
+  ]).slice(0, practiceWordLimit);
 
-    return <div className="preview">
-        <Link className="start-button" to="/practice/full">Start</Link>
-        <section>
-            <h2>Words for this session</h2>
-            <WordsTable visibleWords={ visibleWords } showPreview={false} showProgress={ false } />
-        </section>
-    </div>;
+  return (
+    <div className="preview">
+      <Link className="start-button" to="/practice/full">
+        Start
+      </Link>
+      <section>
+        <h2>Words for this session</h2>
+        <WordsTable
+          visibleWords={visibleWords}
+          showPreview={false}
+          showProgress={false}
+        />
+      </section>
+    </div>
+  );
 };
 
 Preview.propTypes = {
-    words: PropTypes.array.isRequired,
-    practiceWordLimit: PropTypes.number.isRequired,
+  words: PropTypes.array.isRequired,
+  practiceWordLimit: PropTypes.number.isRequired,
 };
 
 export default Preview;

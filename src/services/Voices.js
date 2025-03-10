@@ -34,7 +34,7 @@ export const init = () =>
 
         thaiVoices = allVoices.filter(({ lang }) => rxThaiVoiceTest.test(lang));
         englishVoices = allVoices.filter(({ lang }) =>
-          rxEnglishVoiceTest.test(lang)
+          rxEnglishVoiceTest.test(lang),
         );
 
         englishVoice =
@@ -93,7 +93,7 @@ export const sayWords = (language, texts) => {
     let [current, ...rest] = texts;
     await say(
       language,
-      language === LANGUAGE_ENGLISH ? { term: current } : { thai: current }
+      language === LANGUAGE_ENGLISH ? { term: current } : { thai: current },
     );
     if (rest.length) next(rest);
   };

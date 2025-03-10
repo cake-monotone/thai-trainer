@@ -1,114 +1,135 @@
 @use 'constants';
 
 .vowels {
-    @include constants.full-height();
+  @include constants.full-height();
 
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    // @include section();
+    flex: 1 1;
+  }
+
+  .buttons {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
 
-    > * {
-        // @include section();
-        flex: 1 1;
+    button {
+      @include constants.medium-button(constants.$pencil-theme);
+      flex: none;
+      line-height: 2rem;
+      margin: 0.2rem;
     }
+  }
 
-    .buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+  .visible-vowel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-        button {
-            @include constants.medium-button(constants.$pencil-theme);
-            flex: none;
-            line-height: 2rem;
-            margin: .2rem;
-        }
-
+  @include constants.forHandheld() {
+    .buttons button {
+      font-size: 1rem;
     }
 
     .visible-vowel {
+      min-height: 24em;
+      position: relative;
+      display: flex;
+    }
+    .examples {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.5em;
+      button {
+        font-size: 0.5em;
+      }
+    }
+    span {
+      line-height: 1.4em;
+      text-align: center;
+    }
+
+    .navigation-button {
+      font-size: 2em;
+    }
+  }
+  @include constants.forDesktop() {
+    > * {
+      @include constants.section();
+    }
+
+    .visible-vowel {
+      min-height: 24em;
+      > * {
+        flex: 0;
+      }
+
+      .main-content {
+        flex: 1;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
+
+        h1 {
+          flex: 3;
+        }
+        h2 {
+          flex: 2;
+        }
+        div {
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+        }
+      }
     }
 
-    @include constants.forHandheld() {
-        .buttons button { font-size: 1rem; }
-
-        .visible-vowel {
-            min-height: 24em;
-            position: relative;
-            display: flex;
-        }
-        .examples {
-            display: flex;
-            flex-direction: column;
-            font-size: 1.5em;
-            button { font-size: .5em;}
-        }
-        span {
-            line-height: 1.4em;
-            text-align: center;
-        }
-
-        .navigation-button {
-            font-size: 2em;
-        }
+    h1 {
+      font-size: 8rem;
     }
-    @include constants.forDesktop() {
-        > * {
-            @include constants.section();
-        }
-
-        .visible-vowel {
-            min-height: 24em;
-            > * { flex: 0; }
-
-            .main-content {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-
-                h1 { flex: 3; }
-                h2 { flex: 2; }
-                div {
-                    flex: 1;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-around;
-                }
-            }
-        }
-
-        h1 { font-size: 8rem; }
-        h2 { font-size: 5rem; }
-        span { font-size: 3rem; }
-
-        .navigation-button {
-            font-size: 4em;
-            line-height: 4em;
-            color: constants.$black;
-            transition: opacity 300ms;
-            opacity: .3;
-            cursor: pointer;
-            &:hover {
-                opacity: .8;
-            }
-        }
-
-        .buttons button {
-            font-size: 2rem;
-        }
+    h2 {
+      font-size: 5rem;
+    }
+    span {
+      font-size: 3rem;
     }
 
-    h2 button,
-    span button {
-        vertical-align: middle;
+    .navigation-button {
+      font-size: 4em;
+      line-height: 4em;
+      color: constants.$black;
+      transition: opacity 300ms;
+      opacity: 0.3;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
     }
 
-    @include constants.forHandheld() {
-        .main-content h1 { font-size: 4em; }
-        .main-content h2 { font-size: 3em; }
-        .main-content h3 { font-size: 2em; }
+    .buttons button {
+      font-size: 2rem;
     }
+  }
+
+  h2 button,
+  span button {
+    vertical-align: middle;
+  }
+
+  @include constants.forHandheld() {
+    .main-content h1 {
+      font-size: 4em;
+    }
+    .main-content h2 {
+      font-size: 3em;
+    }
+    .main-content h3 {
+      font-size: 2em;
+    }
+  }
 }

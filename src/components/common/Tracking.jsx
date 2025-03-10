@@ -5,16 +5,16 @@ import { operations } from '../../store';
 import { useLocation } from 'react-router-dom';
 
 const Tracking = ({ trackRouteChange }) => {
-    const { pathname } = useLocation();
-    useEffect(() => {
-        trackRouteChange(pathname);
-    }, [pathname, trackRouteChange]);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    trackRouteChange(pathname);
+  }, [pathname, trackRouteChange]);
 
-    return null;
+  return null;
 };
 
 Tracking.propTypes = {
-    trackRouteChange: PropTypes.func.isRequired,
+  trackRouteChange: PropTypes.func.isRequired,
 };
 
 export default connect(null, operations)(Tracking);

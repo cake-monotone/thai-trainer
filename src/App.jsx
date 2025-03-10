@@ -1,35 +1,35 @@
-import React, { Component, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { Component, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Outlet,
-} from "react-router-dom";
-import { connect } from "react-redux";
-import { operations } from "./store";
-import ScrollReset from "./components/common/ScrollReset";
-import Loading from "./components/Loading";
-import Breadcrumb from "./components/Navigation/Breadcrumbs";
-import MainNavigation from "./components/Navigation/MainNavigation";
-import NavigationBasics from "./components/Navigation/BasicsNavigation";
-import ConsonantNavigation from "./components/Navigation/ConsonantNavigation";
-import TonesNavigation from "./components/Navigation/ToneNavigation";
-import Progress from "./components/Progress";
-import Settings from "./components/Settings";
-import Practice from "./components/Practice";
-import Test from "./components/Test";
-import TestSelector from "./components/TestSelector";
-import Vowels from "./components/Vowels";
-import Consonants from "./components/Consonants";
-import Confusion from "./components/Confusion";
-import ConsonantClasses from "./components/ConsonantClasses";
-import ToneRules from "./components/ToneRules";
-import Tracking from "./components/common/Tracking";
-import NotFound from "./components/NotFound";
+} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { operations } from './store';
+import ScrollReset from './components/common/ScrollReset';
+import Loading from './components/Loading';
+import Breadcrumb from './components/Navigation/Breadcrumbs';
+import MainNavigation from './components/Navigation/MainNavigation';
+import NavigationBasics from './components/Navigation/BasicsNavigation';
+import ConsonantNavigation from './components/Navigation/ConsonantNavigation';
+import TonesNavigation from './components/Navigation/ToneNavigation';
+import Progress from './components/Progress';
+import Settings from './components/Settings';
+import Practice from './components/Practice';
+import Test from './components/Test';
+import TestSelector from './components/TestSelector';
+import Vowels from './components/Vowels';
+import Consonants from './components/Consonants';
+import Confusion from './components/Confusion';
+import ConsonantClasses from './components/ConsonantClasses';
+import ToneRules from './components/ToneRules';
+import Tracking from './components/common/Tracking';
+import NotFound from './components/NotFound';
 
-import "./styles/App.scss";
-import "rc-slider/assets/index.css";
+import './styles/App.scss';
+import 'rc-slider/assets/index.css';
 
 const RouteRoot = () => {
   return (
@@ -51,7 +51,7 @@ const App = (props) => {
 
   useEffect(() => {
     let isMount = true;
-  
+
     Promise.all([
       initializeWordsManager(),
       initializeVoiceManager(),
@@ -62,8 +62,15 @@ const App = (props) => {
       }
     });
 
-    return () => {isMount = false};
-  }, [initializeWordsManager, initializeVoiceManager, initializeSettings, setApplicationReady]);
+    return () => {
+      isMount = false;
+    };
+  }, [
+    initializeWordsManager,
+    initializeVoiceManager,
+    initializeSettings,
+    setApplicationReady,
+  ]);
 
   if (!applicationReady) return <Loading />;
 

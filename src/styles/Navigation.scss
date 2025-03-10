@@ -1,27 +1,26 @@
 @use 'constants';
 
 .navigation {
-    @include constants.section();
-    @include constants.columns();
-    @media screen and (min-width: 1088px) {
-        
-        >* {
-            @include constants.column(6, 3);
-        }
+  @include constants.section();
+  @include constants.columns();
+  @media screen and (min-width: 1088px) {
+    > * {
+      @include constants.column(6, 3);
     }
+  }
 
-    h1 {
-        @include constants.h1();
-        @include constants.flex-row(3em);
-    }
-    h2 {
-        @include constants.h2();
-    }
-    .button {
-        @include constants.large-button(constants.$primary-theme);
-        display: block;
-    }
-    section {
-        @include constants.flex-row();
-    }
+  h1 {
+    @include constants.h1();
+    @include constants.flex-row(3em);
+  }
+  h2 {
+    @include constants.h2();
+  }
+  .button {
+    @include constants.large-button(constants.$primary-theme);
+    display: block;
+  }
+  section {
+    @include constants.flex-row();
+  }
 }

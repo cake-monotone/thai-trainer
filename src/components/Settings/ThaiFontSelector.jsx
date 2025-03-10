@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ThaiFontButton from './ThaiFontButton';
 
-const ThaiFontSelector = ({
-  heading,
-  fonts,
-  selectedFont,
-  onSelectFont,
-}) => {
+const ThaiFontSelector = ({ heading, fonts, selectedFont, onSelectFont }) => {
   const buttons = fonts.map((font) => (
     <ThaiFontButton
       key={font}
@@ -19,10 +14,10 @@ const ThaiFontSelector = ({
 
   return (
     <div className="font-selector">
-      <h2>{ heading }</h2>
+      <h2>{heading}</h2>
       <div className="fonts">{buttons}</div>
-      <div className='example-container'>
-        <span className='thai-font'>เป็นมนุษย์สุดประเสริฐเลิศคุณค่า</span>
+      <div className="example-container">
+        <span className="thai-font">เป็นมนุษย์สุดประเสริฐเลิศคุณค่า</span>
       </div>
     </div>
   );

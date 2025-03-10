@@ -3,12 +3,12 @@ import { loadProgressData, saveProgressData } from './Persistence';
 import { createApplyDeltaWithLimits, makeClamp, getDayOfEpoch } from './Utils';
 
 export const STAGES = [
-    { sleep: 0 },
-    { sleep: 1 },
-    { sleep: 3 },
-    { sleep: 7 },
-    { sleep: 13 },
-    { sleep: Number.MAX_SAFE_INTEGER }
+  { sleep: 0 },
+  { sleep: 1 },
+  { sleep: 3 },
+  { sleep: 7 },
+  { sleep: 13 },
+  { sleep: Number.MAX_SAFE_INTEGER },
 ];
 export const ASPECT_READ = 0;
 export const ASPECT_COMPREHENSION = 1;
@@ -27,34 +27,52 @@ export const TEST_STAGE1 = 0;
 const clamp5 = makeClamp(0, 5);
 const applyDelta = createApplyDeltaWithLimits(0, 5);
 
-export const createDueDateGeneratorForAspects = (stages) => (date, aspectScores) => date + stages[clamp5(Math.min(...aspectScores))].sleep;
+export const createDueDateGeneratorForAspects =
+  (stages) => (date, aspectScores) =>
+    date + stages[clamp5(Math.min(...aspectScores))].sleep;
 
 const generateDueDateByAspects = createDueDateGeneratorForAspects(STAGES);
 
-const deserializeProgress = ([id, date, dueDate, aspectScores]) => ({ id, date, dueDate, aspectScores });
-const hasProgress = ({ date, dueDate, aspectScores }) => (date !== undefined && dueDate !== undefined && aspectScores !== undefined);
-const serializeProgress = ({ id, date, dueDate, aspectScores }) => ([id, date, dueDate, aspectScores]);
-const getProgress = words => words.filter(hasProgress).map(serializeProgress);
+const deserializeProgress = ([id, date, dueDate, aspectScores]) => ({
+  id,
+  date,
+  dueDate,
+  aspectScores,
+});
+const hasProgress = ({ date, dueDate, aspectScores }) =>
+  date !== undefined && dueDate !== undefined && aspectScores !== undefined;
+const serializeProgress = ({ id, date, dueDate, aspectScores }) => [
+  id,
+  date,
+  dueDate,
+  aspectScores,
+];
+const getProgress = (words) => words.filter(hasProgress).map(serializeProgress);
 
 /**
  * Loads words from static file, progress data from local storage and merges all data into an array of words
  */
 export async function loadWords() {
-    let [progressData, wordData] = await Promise.all([
-        loadProgressData(),
-        getWords()
-    ]);
+  let [progressData, wordData] = await Promise.all([
+    loadProgressData(),
+    getWords(),
+  ]);
 
-    let progress = progressData.map(deserializeProgress);
-    return wordData.map(word => {
-        let progressItem = progress.find(({id}) => id === word.id);
-        if (progressItem) return { ...progressItem, ...word };
-        return word;
-    });
+  let progress = progressData.map(deserializeProgress);
+  return wordData.map((word) => {
+    let progressItem = progress.find(({ id }) => id === word.id);
+    if (progressItem) return { ...progressItem, ...word };
+    return word;
+  });
 }
 
 export function resetWords(words) {
-    return words.map(word => ({ ...word, aspectScores: undefined, date: undefined, dueDate: undefined }));
+  return words.map((word) => ({
+    ...word,
+    aspectScores: undefined,
+    date: undefined,
+    dueDate: undefined,
+  }));
 }
 
 /**
@@ -62,8 +80,8 @@ export function resetWords(words) {
  * @param {Object[]} words Array of words containing optional progress data
  */
 export async function saveProgress(words) {
-    const progressItems = getProgress(words);
-    await saveProgressData(progressItems);
+  const progressItems = getProgress(words);
+  await saveProgressData(progressItems);
 }
 
 /**
@@ -73,8 +91,8 @@ export async function saveProgress(words) {
  * @param {Boolean} advance If true, the number at aspect index will be advanced. If negative, it will be rewound
  * @returns {Object} Returns a new word having its aspect array replaced
  */
-export function updateWordAspect(aspectScores=[0, 0], aspect, advance) {
-    return applyDelta(aspectScores, aspect, advance ? 1 : -1);
+export function updateWordAspect(aspectScores = [0, 0], aspect, advance) {
+  return applyDelta(aspectScores, aspect, advance ? 1 : -1);
 }
 
 /**
@@ -88,17 +106,20 @@ export function updateWordAspect(aspectScores=[0, 0], aspect, advance) {
  * @returns A new list of words with the latest applied progress information
  */
 export function applyScoresToWords(scores, words, date) {
-    date = getDayOfEpoch(date || new Date());
-    return words.map(word => {
-        let { id, aspectScores } = word;
-        let items = scores.filter(item => item.id === id);
+  date = getDayOfEpoch(date || new Date());
+  return words.map((word) => {
+    let { id, aspectScores } = word;
+    let items = scores.filter((item) => item.id === id);
 
-        items.forEach(({ aspect, score }) =>  aspectScores = updateWordAspect(aspectScores, aspect, score > 0));
+    items.forEach(
+      ({ aspect, score }) =>
+        (aspectScores = updateWordAspect(aspectScores, aspect, score > 0)),
+    );
 
-        const dueDate = generateDueDateByAspects(date, aspectScores);
+    const dueDate = generateDueDateByAspects(date, aspectScores);
 
-        return { ...word, aspectScores, date, dueDate };
-    });
+    return { ...word, aspectScores, date, dueDate };
+  });
 }
 
 /**
@@ -107,7 +128,10 @@ export function applyScoresToWords(scores, words, date) {
  * @returns {Object[]} All words having been mastered
  */
 export function getMasteredWords(words) {
-    return words.filter(({ aspectScores=null }) => aspectScores !== null && Math.min(...aspectScores) > 4);
+  return words.filter(
+    ({ aspectScores = null }) =>
+      aspectScores !== null && Math.min(...aspectScores) > 4,
+  );
 }
 
 /**
@@ -117,20 +141,23 @@ export function getMasteredWords(words) {
  * @returns {Object[]} A new list of words
  */
 export function getOutstandingWords(words, date) {
-    const filter = ({ dueDate, aspectScores }) => dueDate <= date && Math.min(...aspectScores) > 0 && Math.min(...aspectScores) <= 4;
-    const sorter = (a, b) => {
-        if (a.dueDate !== b.dueDate) return a.dueDate > b.dueDate ? 1 : -1;
+  const filter = ({ dueDate, aspectScores }) =>
+    dueDate <= date &&
+    Math.min(...aspectScores) > 0 &&
+    Math.min(...aspectScores) <= 4;
+  const sorter = (a, b) => {
+    if (a.dueDate !== b.dueDate) return a.dueDate > b.dueDate ? 1 : -1;
 
-        let aMin = Math.min(...a.aspectScores);
-        let bMin = Math.min(...b.aspectScores);
-        if (aMin !== bMin) return aMin < bMin ? 1 : -1;
+    let aMin = Math.min(...a.aspectScores);
+    let bMin = Math.min(...b.aspectScores);
+    if (aMin !== bMin) return aMin < bMin ? 1 : -1;
 
-        if (a.date !== b.date) return a.date > b.date ? 1 : -1;
+    if (a.date !== b.date) return a.date > b.date ? 1 : -1;
 
-        return a.id > b.id ? 1 : -1;
-    };
+    return a.id > b.id ? 1 : -1;
+  };
 
-    return words.filter(filter).sort(sorter);
+  return words.filter(filter).sort(sorter);
 }
 
 /**
@@ -139,8 +166,8 @@ export function getOutstandingWords(words, date) {
  * @returns {Object[]} The words that are currently being practiced
  */
 export function getCurrentPracticeWords(words) {
-    const filter = ({ aspectScores }) => Math.min(...aspectScores) === 0;
-    return words.filter(hasProgress).filter(filter);
+  const filter = ({ aspectScores }) => Math.min(...aspectScores) === 0;
+  return words.filter(hasProgress).filter(filter);
 }
 
 /**
@@ -152,15 +179,16 @@ export function getCurrentPracticeWords(words) {
  * @returns {Object[]} A list of card objects for study
  */
 export function refreshPracticeWords(words, limit, date) {
-    const filterCurrent = ({ aspectScores=null }) => aspectScores !== null && Math.min(...aspectScores) === 0;
-    let currentWords = words.filter(filterCurrent);
+  const filterCurrent = ({ aspectScores = null }) =>
+    aspectScores !== null && Math.min(...aspectScores) === 0;
+  let currentWords = words.filter(filterCurrent);
 
-    const filterPending = ({ aspectScores=null}) => aspectScores === null;
-    let pendingWords = words
-        .filter(filterPending)
-        .map(w => ({ ...w, date, dueDate: date, aspectScores: [0, 0]}));
+  const filterPending = ({ aspectScores = null }) => aspectScores === null;
+  let pendingWords = words
+    .filter(filterPending)
+    .map((w) => ({ ...w, date, dueDate: date, aspectScores: [0, 0] }));
 
-    return [...currentWords, ...pendingWords].slice(0, limit);
+  return [...currentWords, ...pendingWords].slice(0, limit);
 }
 
 /**
@@ -171,7 +199,7 @@ export function refreshPracticeWords(words, limit, date) {
  * @returns {Object[]} New list of words
  */
 export function addPracticeWord(words, word, date) {
-    return [ ...words, { ...word, date, dueDate: date, aspectScores: [0, 0] } ];
+  return [...words, { ...word, date, dueDate: date, aspectScores: [0, 0] }];
 }
 
 /**
@@ -181,7 +209,7 @@ export function addPracticeWord(words, word, date) {
  * @returns {Object[]} New list of words
  */
 export function removePracticeWord(words, word) {
-    return words.filter(({ id }) => id !== word.id);
+  return words.filter(({ id }) => id !== word.id);
 }
 
 /**
@@ -191,11 +219,11 @@ export function removePracticeWord(words, word) {
  * @returns {Number} Returns one of: STATUS_NONE, STATUS_ACTIVE, STATUS_WAITING or STATUS_MASTERED
  */
 export function getRoughStatus({ dueDate, aspectScores }, day) {
-    if (!aspectScores) return STATUS_NONE;
-    if (Math.min(...aspectScores) === 0) return STATUS_PRACTICE;
-    if (Math.min(...aspectScores) >= 5) return STATUS_MASTERED;
-    if (dueDate <= day) return STATUS_OVERDUE;
-    return STATUS_WAITING;
+  if (!aspectScores) return STATUS_NONE;
+  if (Math.min(...aspectScores) === 0) return STATUS_PRACTICE;
+  if (Math.min(...aspectScores) >= 5) return STATUS_MASTERED;
+  if (dueDate <= day) return STATUS_OVERDUE;
+  return STATUS_WAITING;
 }
 
 /**
@@ -205,11 +233,14 @@ export function getRoughStatus({ dueDate, aspectScores }, day) {
  * @returns {Object[]} Returns words organised into groups of overdue, waiting, mastered, practiced and waiting
  */
 export function organizeByRoughStatus(words, day) {
-    return words.reduce((statuses, word) => {
-        let status = getRoughStatus(word, day);
-        statuses[status].push(word);
-        return statuses;
-    }, [[], [], [], [], []]);
+  return words.reduce(
+    (statuses, word) => {
+      let status = getRoughStatus(word, day);
+      statuses[status].push(word);
+      return statuses;
+    },
+    [[], [], [], [], []],
+  );
 }
 
 /**
@@ -219,11 +250,11 @@ export function organizeByRoughStatus(words, day) {
  * @param {Number[]} filter The status values to be included in the filtering
  * @returns {Object[]} filtered words
  */
-export function filterByRoughStatus(words, day, filter=[]) {
-    return words
-        .map(word => ({ word, status: getRoughStatus(word, day )}))
-        .filter(({ status }) => filter.includes(status))
-        .map(({ word }) => word);
+export function filterByRoughStatus(words, day, filter = []) {
+  return words
+    .map((word) => ({ word, status: getRoughStatus(word, day) }))
+    .filter(({ status }) => filter.includes(status))
+    .map(({ word }) => word);
 }
 
 /**
@@ -233,5 +264,5 @@ export function filterByRoughStatus(words, day, filter=[]) {
  * @returns {Object[]} An updated list of words with any content from queue
  */
 export function updateProgress(words, queue) {
-    return words.map(w => queue.find((({id}) => id === w.id)) || w);
+  return words.map((w) => queue.find(({ id }) => id === w.id) || w);
 }

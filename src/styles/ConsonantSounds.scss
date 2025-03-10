@@ -1,50 +1,57 @@
 @use 'constants';
 
 .consonant-sounds {
-    @include constants.container_n_section();
+  @include constants.container_n_section();
 
-    nav {
-        @include constants.tab-header();
+  nav {
+    @include constants.tab-header();
+  }
+  section {
+    @include constants.section();
+    margin: 1em 0;
+    padding: 0.5rem;
+    border: 1px solid constants.$color-faint;
+    border-radius: 1rem;
+
+    h2 {
+      font-size: 3rem;
+      font-weight: normal;
     }
-    section {
-        @include constants.section();
-        margin: 1em 0;
-        padding: .5rem;
-        border: 1px solid constants.$color-faint;
+    .characters {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      div {
+        width: 15rem;
+        padding: 1rem;
+        margin: 1rem;
+        text-align: center;
+        border: 1px solid constants.$color-muted;
         border-radius: 1rem;
+      }
 
-        h2 {
-            font-size: 3rem;
-            font-weight: normal;
-        }
-        .characters {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
+      div {
+        background-color: constants.$color-faint;
+      }
+      div.aspirated {
+        border-color: constants.$black;
+      }
+      div.unaspirated {
+        border-color: constants.$black;
+        border-style: dashed;
+      }
 
-            div {
-                width: 15rem;
-                padding: 1rem;
-                margin: 1rem;
-                text-align: center;
-                border: 1px solid constants.$color-muted;
-                border-radius: 1rem;
-            }
-            
-            div { background-color: constants.$color-faint; }
-            div.aspirated { border-color: constants.$black; }
-            div.unaspirated { border-color: constants.$black; border-style: dashed; }
-
-            h3 {
-                font-size: 3rem;
-                font-weight: 400;
-                margin-bottom: 1em;
-            }
-            p {
-                font-size: 2rem;
-                font-weight: 300;
-            }
-        }
+      h3 {
+        font-size: 3rem;
+        font-weight: 400;
+        margin-bottom: 1em;
+      }
+      p {
+        font-size: 2rem;
+        font-weight: 300;
+      }
     }
+  }
 }

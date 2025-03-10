@@ -1,75 +1,75 @@
 @use 'constants';
 
 .consonant-classes {
-    @include constants.container_n_section();
+  @include constants.container_n_section();
 
-    .review {
-        > section {
-            display: flex;
-            margin: 1em;
-            border: 1px solid constants.$color-faint;
-            border-radius: .4em;
-            background-color: constants.$color-faint;
+  .review {
+    > section {
+      display: flex;
+      margin: 1em;
+      border: 1px solid constants.$color-faint;
+      border-radius: 0.4em;
+      background-color: constants.$color-faint;
 
-            @include constants.forHandheld() {
-                flex-direction: column;
-            }
+      @include constants.forHandheld() {
+        flex-direction: column;
+      }
 
-            h2 {
-                flex: .1;
-                height: 100%;
-                padding: 0 1em;
-                margin: 0;
-                align-self: center;
-            }
-            > div {
-                display: flex;
-                flex: 1;
-                flex-wrap: wrap;
-                padding: 1em;
-                background-color: white;
+      h2 {
+        flex: 0.1;
+        height: 100%;
+        padding: 0 1em;
+        margin: 0;
+        align-self: center;
+      }
+      > div {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        padding: 1em;
+        background-color: white;
 
-                div {
-                    transition: color 300ms;
-                    font-size: 2em;
-                    padding: .25em .5em;
-                    color: constants.$color-faint;
-                }
-            }
+        div {
+          transition: color 300ms;
+          font-size: 2em;
+          padding: 0.25em 0.5em;
+          color: constants.$color-faint;
         }
-        .highlighted {
-            color: inherit;
-        }
-        .high {
-            color: constants.$tc_high;
-        }
-        .mid {
-            color: constants.$tc_mid;
-        }
-        .low {
-            color: constants.$tc_low;
-        }
+      }
     }
-
-    .button {
-        @include constants.large-button(constants.$primary-theme);
-        width: 60%;
-        margin-top: 1em;
-        margin-left: 20%;
+    .highlighted {
+      color: inherit;
     }
-
-    .drill {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-        h3 {
-            line-height: 1.2em;
-        }
+    .high {
+      color: constants.$tc_high;
     }
-    .progress-bar {
-        @include constants.progress-bar;
+    .mid {
+      color: constants.$tc_mid;
     }
+    .low {
+      color: constants.$tc_low;
+    }
+  }
+
+  .button {
+    @include constants.large-button(constants.$primary-theme);
+    width: 60%;
+    margin-top: 1em;
+    margin-left: 20%;
+  }
+
+  .drill {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    h3 {
+      line-height: 1.2em;
+    }
+  }
+  .progress-bar {
+    @include constants.progress-bar;
+  }
 }

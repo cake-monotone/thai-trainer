@@ -5,34 +5,33 @@ import { classNames } from '../../services/Utils';
 import '../../styles/Hint.scss';
 
 const Hint = ({ children, toggleHint, title = 'Hint', hintVisible }) => {
-    const classes = classNames({
-        hint: true,
-        visible: hintVisible
-    });
+  const classes = classNames({
+    hint: true,
+    visible: hintVisible,
+  });
 
-    return <div className={ classes }>
-        <div className="overlay">
-            <div className="background" onClick={ toggleHint }></div>
-            <div className="content">
-                <div className="left-side">
-                ℹ
-                </div>
-                <div className="right-side">
-                    <h2>{ title }</h2>
-                    <section>{ children }</section>
-                </div>
-            </div>
+  return (
+    <div className={classes}>
+      <div className="overlay">
+        <div className="background" onClick={toggleHint}></div>
+        <div className="content">
+          <div className="left-side">ℹ</div>
+          <div className="right-side">
+            <h2>{title}</h2>
+            <section>{children}</section>
+          </div>
         </div>
-        <button onClick={ toggleHint }>?</button>
-    </div>;
+      </div>
+      <button onClick={toggleHint}>?</button>
+    </div>
+  );
 };
 
-
 Hint.propTypes = {
-    children: PropTypes.any.isRequired,
-    toggleHint: PropTypes.func.isRequired,
-    title: PropTypes.string,
-    hintVisible: PropTypes.bool.isRequired,
+  children: PropTypes.any.isRequired,
+  toggleHint: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  hintVisible: PropTypes.bool.isRequired,
 };
 
 export default Hint;

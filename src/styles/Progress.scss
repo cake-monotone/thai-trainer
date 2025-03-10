@@ -1,11 +1,10 @@
 @use 'constants';
 
-
 .progress-page {
-    @include constants.section();
-    @include constants.contents-centered();
+  @include constants.section();
+  @include constants.contents-centered();
 
-    .filter {
-        @include constants.button-group();
-    }
+  .filter {
+    @include constants.button-group();
+  }
 }

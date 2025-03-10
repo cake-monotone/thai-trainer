@@ -3,30 +3,57 @@ import PropTypes from 'prop-types';
 import PlayButton from '../common/PlayButton';
 import { isPronunciation } from '../../services/Voices';
 
-const getClass = (word, selected, correct, isAnswered) => selected === null ? 'answer'
-    : isAnswered && word === correct ? 'answer correct'
-    : isAnswered && word === selected && word !== correct ? 'answer incorrect'
-    : isAnswered ? 'answer hidden'
-    : selected === word ? 'answer selected'
-    : selected === null ? 'answer'
-    : 'answer rejected';
+const getClass = (word, selected, correct, isAnswered) =>
+  selected === null
+    ? 'answer'
+    : isAnswered && word === correct
+      ? 'answer correct'
+      : isAnswered && word === selected && word !== correct
+        ? 'answer incorrect'
+        : isAnswered
+          ? 'answer hidden'
+          : selected === word
+            ? 'answer selected'
+            : selected === null
+              ? 'answer'
+              : 'answer rejected';
 
-const Answer = ({ word, property, onSelect, selected, correct, isAnswered }) => <div className={ getClass(word, selected, correct, isAnswered) } onClick={ onSelect }>
-    <span className={ `${property} ${!isPronunciation(property) ? 'thai-font':''}` }>{ word[property] }</span>
-    { isPronunciation(property) ? <span className="play-button"><PlayButton word={word} /></span> : null }
-</div>;
+const Answer = ({
+  word,
+  property,
+  onSelect,
+  selected,
+  correct,
+  isAnswered,
+}) => (
+  <div
+    className={getClass(word, selected, correct, isAnswered)}
+    onClick={onSelect}
+  >
+    <span
+      className={`${property} ${!isPronunciation(property) ? 'thai-font' : ''}`}
+    >
+      {word[property]}
+    </span>
+    {isPronunciation(property) ? (
+      <span className="play-button">
+        <PlayButton word={word} />
+      </span>
+    ) : null}
+  </div>
+);
 
 const wordShape = PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    term: PropTypes.string.isRequired,
-    thai: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  term: PropTypes.string.isRequired,
+  thai: PropTypes.string.isRequired,
 });
 Answer.propTypes = {
-    word: wordShape.isRequired,
-    property: PropTypes.string.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    selected: wordShape,
-    isAnswered: PropTypes.bool.isRequired,
-    correct: wordShape,
+  word: wordShape.isRequired,
+  property: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  selected: wordShape,
+  isAnswered: PropTypes.bool.isRequired,
+  correct: wordShape,
 };
 export default Answer;

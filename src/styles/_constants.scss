@@ -1,11 +1,11 @@
-@use "sass:color";
-@use "sass:map";
-@use "sass:meta";
-$color-primary-0: #2E4272;	// Main Primary color */
-$color-primary-1: #858B9A;
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:meta';
+$color-primary-0: #2e4272; // Main Primary color */
+$color-primary-1: #858b9a;
 $color-primary-2: #556386;
-$color-primary-3: #11275E;
-$color-primary-4: #04184A;
+$color-primary-3: #11275e;
+$color-primary-4: #04184a;
 
 $white: #f8f8f8;
 $black: #333;
@@ -26,416 +26,428 @@ $tc_none: rgb(37, 37, 37);
 
 $color-primary: #00d1b2;
 @mixin container() {
-    margin: 0 auto;
-    position: relative;
-      
-    @media screen and (min-width: 1088px) {
-        max-width: 960px;
-        width: 960px;
-    }
-      
-    @media screen and (max-width: 1279px) {
-        max-width: 1152px;
-        width: auto;
-    }
-      
-      
-    @media screen and (min-width: 1280px) {
-        max-width: 1152px;
-        width: auto;
-    }
-      
-    @media screen and (min-width: 1472px) {
-        max-width: 1344px;
-        width: 1344px;
-    }
+  margin: 0 auto;
+  position: relative;
+
+  @media screen and (min-width: 1088px) {
+    max-width: 960px;
+    width: 960px;
+  }
+
+  @media screen and (max-width: 1279px) {
+    max-width: 1152px;
+    width: auto;
+  }
+
+  @media screen and (min-width: 1280px) {
+    max-width: 1152px;
+    width: auto;
+  }
+
+  @media screen and (min-width: 1472px) {
+    max-width: 1344px;
+    width: 1344px;
+  }
 }
 @mixin section() {
-    padding: 3rem 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
 @mixin container_n_section() {
-    @include container();
-    & {
-        // To prvent [mixed-decl] warning
-        @include section();
-    }
+  @include container();
+  & {
+    // To prvent [mixed-decl] warning
+    @include section();
+  }
 }
 
 $default-theme: (
-    backgroundColor: #edeff8,
-    foregroundColor: #515664,
-    borderColor: #cbcdd3,
-    altBackgroundColor: #e1e1e3,
-    altForegroundColor: #4f5a74,
-    altBorderColor: #3d4a6b,
-    disabledForegroundColor: #a6a3a3,
-    disabledBackgroundColor: #dddddd,
-    disabledBorderColor: #bfbfbf,
-    borderRadius: 1em,
+  backgroundColor: #edeff8,
+  foregroundColor: #515664,
+  borderColor: #cbcdd3,
+  altBackgroundColor: #e1e1e3,
+  altForegroundColor: #4f5a74,
+  altBorderColor: #3d4a6b,
+  disabledForegroundColor: #a6a3a3,
+  disabledBackgroundColor: #dddddd,
+  disabledBorderColor: #bfbfbf,
+  borderRadius: 1em,
 );
 $pencil-theme: (
-    backgroundColor: transparent,
-    foregroundColor: #5c6172,
-    borderColor: #6f7faa,
-    altForegroundColor: $white,
-    altBackgroundColor: #2c3244,
-    altBorderColor: #3d4a6b,
+  backgroundColor: transparent,
+  foregroundColor: #5c6172,
+  borderColor: #6f7faa,
+  altForegroundColor: $white,
+  altBackgroundColor: #2c3244,
+  altBorderColor: #3d4a6b,
 );
 $primary-theme: (
-    backgroundColor: #00d1b2,
-    foregroundColor: #ffffff,
-    borderColor: #49c2a0,
-    altBackgroundColor: #00b89c,
-    altForegroundColor: #ffffff,
-    altBorderColor: #47b797,
+  backgroundColor: #00d1b2,
+  foregroundColor: #ffffff,
+  borderColor: #49c2a0,
+  altBackgroundColor: #00b89c,
+  altForegroundColor: #ffffff,
+  altBorderColor: #47b797,
 );
 @mixin forHandheld() {
-    @media (max-width:768px) { @content; }
+  @media (max-width: 768px) {
+    @content;
+  }
 }
 @mixin forDesktop() {
-    @media (min-width: 768px) { @content; }
+  @media (min-width: 768px) {
+    @content;
+  }
 }
-@mixin button($theme:()) {
-    $settings: map.merge($default-theme, $theme);
-    background-color: map.get($settings, backgroundColor);
-    border: 1px solid map.get($settings, borderColor);
-    border-radius: .3em;
-    color: map.get($settings, foregroundColor );
-    cursor: pointer;
-    display: inline-block;
-    flex: 1;
-    font-size: 1rem;
-	justify-content: center;
-	padding-bottom: calc(0.375em - 1px);
-	padding-left: 0.75em;
-	padding-right: 0.75em;
-	padding-top: calc(0.375em - 1px);
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    white-space: nowrap;
+@mixin button($theme: ()) {
+  $settings: map.merge($default-theme, $theme);
+  background-color: map.get($settings, backgroundColor);
+  border: 1px solid map.get($settings, borderColor);
+  border-radius: 0.3em;
+  color: map.get($settings, foregroundColor);
+  cursor: pointer;
+  display: inline-block;
+  flex: 1;
+  font-size: 1rem;
+  justify-content: center;
+  padding-bottom: calc(0.375em - 1px);
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  padding-top: calc(0.375em - 1px);
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  white-space: nowrap;
 
-    &:hover {
-        background-color: map.get($settings, altBackgroundColor);
-        border-color: map.get($settings, altBorderColor);
-        color: map.get( $settings, altForegroundColor);
-    }
-    &.selected,
-    &:active,
-    &:focus {
-        background-color: color.adjust(map.get($settings, altBackgroundColor ), $lightness: -5%);
-        border-color: map.get($settings, altBorderColor );
-        color: map.get($settings, altForegroundColor);
-    }
+  &:hover {
+    background-color: map.get($settings, altBackgroundColor);
+    border-color: map.get($settings, altBorderColor);
+    color: map.get($settings, altForegroundColor);
+  }
+  &.selected,
+  &:active,
+  &:focus {
+    background-color: color.adjust(
+      map.get($settings, altBackgroundColor),
+      $lightness: -5%
+    );
+    border-color: map.get($settings, altBorderColor);
+    color: map.get($settings, altForegroundColor);
+  }
 
-    &[disabled] {
-        color: map.get($settings, disabledForegroundColor);
-        background-color: map.get($settings, disabledBackgroundColor);
-        border-color: map.get($settings, disabledBorderColor);
-        cursor: default;
-    }
+  &[disabled] {
+    color: map.get($settings, disabledForegroundColor);
+    background-color: map.get($settings, disabledBackgroundColor);
+    border-color: map.get($settings, disabledBorderColor);
+    cursor: default;
+  }
 }
-@mixin large-button($theme:()) {
-    @include button($theme);
-    border-radius: .2em;
-    font-size: 1.5em;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+@mixin large-button($theme: ()) {
+  @include button($theme);
+  border-radius: 0.2em;
+  font-size: 1.5em;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
 }
-@mixin medium-button($theme:()) {
-    @include button($theme);
-    font-size: 1em;
+@mixin medium-button($theme: ()) {
+  @include button($theme);
+  font-size: 1em;
 }
-@mixin small-button($theme:()) {
-    @include button($theme);
-    font-size: .8em;
+@mixin small-button($theme: ()) {
+  @include button($theme);
+  font-size: 0.8em;
 }
-@mixin customize-button($theme:()) {
-    content: meta.inspect($theme);
-    $theme: map.merge($default-theme, $theme);
+@mixin customize-button($theme: ()) {
+  content: meta.inspect($theme);
+  $theme: map.merge($default-theme, $theme);
 
-    background-color: map.get($theme, backgroundColor);
-    border-color: map.get($theme, borderColor);
-    color: map.get($theme, foregroundColor);
+  background-color: map.get($theme, backgroundColor);
+  border-color: map.get($theme, borderColor);
+  color: map.get($theme, foregroundColor);
 
-    &:hover {
-        background-color: map.get($theme, altBackgroundColor);
-        border-color: map.get($theme, altBorderColor);
-        color: map.get( $theme, altForegroundColor);
-    }
-    &:active,
-    &:focus {
-        background-color: color.adjust(map.get($theme, altBackgroundColor ), $lightness: -5%);
-        border-color: map.get($theme, altBorderColor );
-        color: map.get($theme, altForegroundColor);
-    }
+  &:hover {
+    background-color: map.get($theme, altBackgroundColor);
+    border-color: map.get($theme, altBorderColor);
+    color: map.get($theme, altForegroundColor);
+  }
+  &:active,
+  &:focus {
+    background-color: color.adjust(
+      map.get($theme, altBackgroundColor),
+      $lightness: -5%
+    );
+    border-color: map.get($theme, altBorderColor);
+    color: map.get($theme, altForegroundColor);
+  }
 
-    &[disabled] {
-        color: map.get($theme, disabledForegroundColor);
-        background-color: map.get($theme, disabledBackgroundColor);
-        border-color: map.get($theme, disabledBorderColor);
-        cursor: default;
-    }
-
+  &[disabled] {
+    color: map.get($theme, disabledForegroundColor);
+    background-color: map.get($theme, disabledBackgroundColor);
+    border-color: map.get($theme, disabledBorderColor);
+    cursor: default;
+  }
 }
-@mixin icon-square($theme:()) {
-    $theme: map.merge($theme, $default-theme);
+@mixin icon-square($theme: ()) {
+  $theme: map.merge($theme, $default-theme);
 
-    background-color: map.get($theme, backgroundColor);
-    border-radius: map.get($theme, borderRadius);
-    border: 1px solid map.get($theme, borderColor);
-    color: map.get($theme, foregroundColor);
-    display: inline-block;
-    font-size: 1.2rem;
-    height: 1.5em;
-    line-height: 1.5em;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    width: 1.5em;
+  background-color: map.get($theme, backgroundColor);
+  border-radius: map.get($theme, borderRadius);
+  border: 1px solid map.get($theme, borderColor);
+  color: map.get($theme, foregroundColor);
+  display: inline-block;
+  font-size: 1.2rem;
+  height: 1.5em;
+  line-height: 1.5em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 1.5em;
 }
-@mixin icon-button($theme:()) {
-    @include button();
-    @include icon-square($theme);
-    cursor: pointer;
+@mixin icon-button($theme: ()) {
+  @include button();
+  @include icon-square($theme);
+  cursor: pointer;
 }
 @mixin text-button() {
-    @include button();
-    background-color: transparent;
+  @include button();
+  background-color: transparent;
+  border-color: transparent;
+  user-select: none;
+  &:hover,
+  &:active,
+  &:focus {
     border-color: transparent;
-    user-select: none;
-    &:hover, &:active, &:focus  {
-        border-color: transparent;
-        background-color: transparent
-    }
+    background-color: transparent;
+  }
 }
 
 @mixin button-group($minWidth: 768px) {
-    margin-bottom: 1rem;
-    vertical-align: baseline;
+  margin-bottom: 1rem;
+  vertical-align: baseline;
 
-    @media(min-width: $minWidth) {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        align-self: center;
-        justify-content: flex-start;
+  @media (min-width: $minWidth) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: center;
+    justify-content: flex-start;
 
-        > * {
-            &:first-child { border-radius: .25rem 0 0 .25rem; }
-            &:last-child { border-radius: 0 .25rem .25rem 0; }
-        }
-    }
-    
     > * {
-        @include button();
-
-        display: flex;
-        padding-bottom: calc(0.375em - 1px);
-        padding-left: 0.75em;
-        padding-right: 0.75em;
-        padding-top: calc(0.375em - 1px);
-        justify-content: center;
-        margin-bottom: 0.5rem;
-        font-size: 1rem;
-        line-height: 1.5em;
-        border: 1px solid color.adjust($white, $lightness: -2.5%);
-        background-color: color.adjust($white, $lightness: -.5%);
-        color: $black;
-        border-radius: 0;
-
-        &.selected {
-            background-color: $color-primary;
-            border-color: color.adjust($color-primary, $lightness: -2.5%);
-            color: $white;
-        }
+      &:first-child {
+        border-radius: 0.25rem 0 0 0.25rem;
+      }
+      &:last-child {
+        border-radius: 0 0.25rem 0.25rem 0;
+      }
     }
-}
+  }
 
+  > * {
+    @include button();
+
+    display: flex;
+    padding-bottom: calc(0.375em - 1px);
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    padding-top: calc(0.375em - 1px);
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5em;
+    border: 1px solid color.adjust($white, $lightness: -2.5%);
+    background-color: color.adjust($white, $lightness: -0.5%);
+    color: $black;
+    border-radius: 0;
+
+    &.selected {
+      background-color: $color-primary;
+      border-color: color.adjust($color-primary, $lightness: -2.5%);
+      color: $white;
+    }
+  }
+}
 
 @mixin heading() {
-    text-align: center;
-    font-weight: 500;
-    color: $black;
-	line-height: 1.125;
-
+  text-align: center;
+  font-weight: 500;
+  color: $black;
+  line-height: 1.125;
 }
 @mixin h1() {
-    @include heading();
-    margin-bottom: 1.5rem;
-    font-size: 3rem;
+  @include heading();
+  margin-bottom: 1.5rem;
+  font-size: 3rem;
 }
 @mixin h2() {
-    @include heading();
-    margin-bottom: 1.25rem;
-    font-size: 1.6rem;
+  @include heading();
+  margin-bottom: 1.25rem;
+  font-size: 1.6rem;
 }
 @mixin flex-row($height: 0) {
-    flex: 1 1;
-    @if $height == 0 {
-        flex-basis: $height;
-    }
+  flex: 1 1;
+  @if $height == 0 {
+    flex-basis: $height;
+  }
 }
 @mixin flex-column() {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 @mixin full-height() {
-    height: 100%;
+  height: 100%;
 }
 @mixin full-width() {
-    width: 100%;
+  width: 100%;
 }
 @mixin is-narrow() {
-    white-space: nowrap;
-	width: 1%;
+  white-space: nowrap;
+  width: 1%;
 }
 @mixin contents-centered() {
-    text-align: center !important;
+  text-align: center !important;
 }
 @mixin resize-text($amount: 100%) {
-    font-size: $amount;
+  font-size: $amount;
 }
 @mixin table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    background-color: $white;
-    color: $black;
-    margin: 4em 0;
-    
-    thead th {
-        border-bottom: 1px solid $color-muted;
-        padding: 0.5em 0;
-    }
-    tbody td {
-        line-height: 2em;
-        vertical-align: middle;
-        border: 1px solid $color-muted;
-        border-width: 0 0 1px;
-        padding: 0.5em 0;
-        text-align: left;
-    }
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: $white;
+  color: $black;
+  margin: 4em 0;
+
+  thead th {
+    border-bottom: 1px solid $color-muted;
+    padding: 0.5em 0;
+  }
+  tbody td {
+    line-height: 2em;
+    vertical-align: middle;
+    border: 1px solid $color-muted;
+    border-width: 0 0 1px;
+    padding: 0.5em 0;
+    text-align: left;
+  }
 }
 
-
 @mixin highlight-column($column) {
-    .sample > :nth-child( #{$column} ) {
-        border-color: $color-muted;
-        background-color: $color-faint;
-        border-style: solid;
-        border-width: 0 1px 0 1px;
-    }
-    .sample:first-child > :nth-child( #{$column} ) {
-        border-radius: .4em .4em 0 0;
-        border-top-width: 1px;
-    }
-    .sample:last-child > :nth-child( #{$column} ) {
-        border-radius: 0 0 .4em .4em;
-        border-bottom-width: 1px;
-    }
+  .sample > :nth-child(#{$column}) {
+    border-color: $color-muted;
+    background-color: $color-faint;
+    border-style: solid;
+    border-width: 0 1px 0 1px;
+  }
+  .sample:first-child > :nth-child(#{$column}) {
+    border-radius: 0.4em 0.4em 0 0;
+    border-top-width: 1px;
+  }
+  .sample:last-child > :nth-child(#{$column}) {
+    border-radius: 0 0 0.4em 0.4em;
+    border-bottom-width: 1px;
+  }
 }
 
 @mixin columns($lined: false) {
-    .is-centered {
-        justify-content: center;
-    }
+  .is-centered {
+    justify-content: center;
+  }
 
-    @if ($lined == true) {
-        border-bottom: 1px solid $color-faint;
-    }
+  @if ($lined == true) {
+    border-bottom: 1px solid $color-faint;
+  }
 
-    > * {
-        display: block;
-        flex-basis: 0;
-        flex-grow: 1;
-        flex-shrink: 1;
-        padding: 0.75rem;
-    }
+  > * {
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 0.75rem;
+  }
 }
 @mixin column($width: 1, $offset: 0) {
-    flex: none;
-    width: 100% * $width / 12;
-    margin-left: 100% * $offset / 12;
+  flex: none;
+  width: 100% * $width / 12;
+  margin-left: 100% * $offset / 12;
 }
 
 @mixin tab-header() {
+  width: 100%;
+  text-align: center;
+
+  @include forHandheld() {
+    overflow-x: auto;
+    box-shadow: inset rgba(black, 0.2) 2px 4px 3px;
+    border-color: rgba($color-muted, 0.8) rgba($color-muted, 0.2)
+      rgba($color-muted, 0.2) rgba($color-muted, 0.8);
+    border-style: solid;
+    background-color: rgba(211, 211, 211, 0.1);
+    border-width: 1px;
+  }
+
+  ol {
+    display: inline-block;
     width: 100%;
-    text-align: center;
+    position: relative;
+    white-space: nowrap;
+    padding: 1em 0;
+  }
 
-    @include forHandheld() {
-        overflow-x: auto;
-        box-shadow: inset rgba(black, .2) 2px 4px 3px;
-        border-color: rgba($color-muted, .8) rgba($color-muted, .2) rgba($color-muted, .2) rgba($color-muted, .8);
-        border-style: solid;
-        background-color: rgba(211, 211, 211, .1);
-        border-width: 1px;
-    }
-
-    ol {
-        display: inline-block;
-        width: 100%;
-        position: relative;
-        white-space: nowrap;
-        padding: 1em 0;
-    }
-
-    li {
-        display: inline-block;
-        padding: 0 1em;
-    }
+  li {
+    display: inline-block;
+    padding: 0 1em;
+  }
 }
 @mixin tab-headerx() {
-    ol {
-        display: flex;
-        justify-content: center; 
-        margin-top: 3em;
-        border-bottom: 1px solid $color-faint;
+  ol {
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+    border-bottom: 1px solid $color-faint;
 
-        li {
-            transition: all 300ms;
-            padding: 0 1em .5em;
-            border: 0px solid transparent;
-            border-bottom-width: 1px;
-            margin-bottom: -1px;
-            color: $color-muted;
-            cursor: pointer;
-            &:hover { 
-                border-bottom-color: $color-primary-2;
-                color: $color-primary-2;
-            }
-        }
-
-        .selected {
-            border-bottom-color: $black;
-            color: $black;
-            cursor: default;
-        }
+    li {
+      transition: all 300ms;
+      padding: 0 1em 0.5em;
+      border: 0px solid transparent;
+      border-bottom-width: 1px;
+      margin-bottom: -1px;
+      color: $color-muted;
+      cursor: pointer;
+      &:hover {
+        border-bottom-color: $color-primary-2;
+        color: $color-primary-2;
+      }
     }
+
+    .selected {
+      border-bottom-color: $black;
+      color: $black;
+      cursor: default;
+    }
+  }
 }
 @mixin progress-bar() {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    height: 1em;
-    width: 100%;
-    background-color: #d7d5f6;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 1em;
+  width: 100%;
+  background-color: #d7d5f6;
 
-    .bar {
-        position: absolute;
-        left: 0;
-        height: 100%;
-        background-color: $color-success;
-        transition: width 300ms 300ms;
-        z-index: 1;
-    }
-    .label {
-        position: relative;
-        color: $color-primary-0;
-        text-align: center;
-        width: 100%;
-        z-index: 2;
-    }
+  .bar {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    background-color: $color-success;
+    transition: width 300ms 300ms;
+    z-index: 1;
+  }
+  .label {
+    position: relative;
+    color: $color-primary-0;
+    text-align: center;
+    width: 100%;
+    z-index: 2;
+  }
 }

@@ -4,11 +4,16 @@ import { makeClamp, compose } from './Utils';
 
 const clamp1_3 = makeClamp(1.3);
 const clamp5 = makeClamp(0, 5);
-const getAdjustedGrade = grade => clamp5(5 - grade);
+const getAdjustedGrade = (grade) => clamp5(5 - grade);
 
-const calculateEasiness = (ef, adjustedGrade) => ef + (0.1 - adjustedGrade * (0.08 + adjustedGrade * 0.02));
+const calculateEasiness = (ef, adjustedGrade) =>
+  ef + (0.1 - adjustedGrade * (0.08 + adjustedGrade * 0.02));
 
-export const getEasiness = compose(calculateEasiness, clamp1_3, getAdjustedGrade);
+export const getEasiness = compose(
+  calculateEasiness,
+  clamp1_3,
+  getAdjustedGrade,
+);
 
 /**
  * Calculates the number of days since the "start of day" (4am) on Jan1 1970
@@ -16,20 +21,20 @@ export const getEasiness = compose(calculateEasiness, clamp1_3, getAdjustedGrade
  * @returns { Number } The number of days since 4am on the start of the epoch
  */
 export const getDayOfEpoch = (date = new Date()) => {
-    // tsAdjustment is the number of ms difference between local time and UTC
-    const tsAdjustment = date.getTimezoneOffset() * 60000;
+  // tsAdjustment is the number of ms difference between local time and UTC
+  const tsAdjustment = date.getTimezoneOffset() * 60000;
 
-    // timestamp is the number of ms since 1Jan1970 in the local timezone
-    const timestamp = date.getTime() - tsAdjustment;
+  // timestamp is the number of ms since 1Jan1970 in the local timezone
+  const timestamp = date.getTime() - tsAdjustment;
 
-    //     Math.floor((timestamp - fourAM)) / twentyfourHours)
-    return Math.floor((timestamp - 14400000) / 86400000);
+  //     Math.floor((timestamp - fourAM)) / twentyfourHours)
+  return Math.floor((timestamp - 14400000) / 86400000);
 };
 
 /**
  * @static {Object} default shape of a card
  */
-const defaultCard = { repetitions: 0, easiness: 2.5, interval: 1};
+const defaultCard = { repetitions: 0, easiness: 2.5, interval: 1 };
 /**
  * Generates a new card based on a current card and its quality of answer
  * @param {Number} quality
@@ -39,23 +44,23 @@ const defaultCard = { repetitions: 0, easiness: 2.5, interval: 1};
  * @param {number} card.interval The number of days between tests
  */
 export const calculateSuperMemo2Algorithm = (quality, card = defaultCard) => {
-    let { repetitions, easiness, interval } = card;
+  let { repetitions, easiness, interval } = card;
 
-    quality = clamp5(quality);
-    repetitions = quality < 3 ? 0 : repetitions + 1;
+  quality = clamp5(quality);
+  repetitions = quality < 3 ? 0 : repetitions + 1;
 
-    easiness = repetitions > 2 ? getEasiness(easiness, quality) : easiness;
-    interval = repetitions > 2 ? Math.round(interval * easiness) : repetitions < 2 ? 1 : 6;
+  easiness = repetitions > 2 ? getEasiness(easiness, quality) : easiness;
+  interval =
+    repetitions > 2 ? Math.round(interval * easiness) : repetitions < 2 ? 1 : 6;
 
-    const now = getDayOfEpoch();
-    const dueDate = now + interval;
+  const now = getDayOfEpoch();
+  const dueDate = now + interval;
 
-    return {
-        day: now,
-        dueDate,
-        easiness,
-        interval,
-        repetitions,
-    };
+  return {
+    day: now,
+    dueDate,
+    easiness,
+    interval,
+    repetitions,
+  };
 };
-

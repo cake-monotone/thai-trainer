@@ -1,42 +1,43 @@
 @use 'constants';
 
-
 .words-table {
-    @include constants.container();
-    table {
-        @include constants.table();
-        @include constants.full-width();
-        background-color: transparent;
+  @include constants.container();
+  table {
+    @include constants.table();
+    @include constants.full-width();
+    background-color: transparent;
 
-        th,
-        td {
-            width: 33%;
+    th,
+    td {
+      width: 33%;
+    }
+    &.no-progress {
+      td,
+      th {
+        &:last-child {
+          width: 1%;
         }
-        &.no-progress {
-            td, th {
-                &:last-child {
-                    width: 1%;
-                }
-            }
-        }
-
-        th {
-            font-weight: 500;
-            font-size: 1.1em;
-            text-align: left;
-        }
-        td:nth-child(2) {
-            @include constants.resize-text(180%)
-        }
-        th:nth-child(4), td:nth-child(4) {
-            @include constants.is-narrow;
-        }
+      }
     }
 
-    .progress-meter {
-        display: inline-block;
-        margin: .25em;
-        width: 1.5em;
-        height: 1.5em;
-    }    
+    th {
+      font-weight: 500;
+      font-size: 1.1em;
+      text-align: left;
+    }
+    td:nth-child(2) {
+      @include constants.resize-text(180%);
+    }
+    th:nth-child(4),
+    td:nth-child(4) {
+      @include constants.is-narrow;
+    }
+  }
+
+  .progress-meter {
+    display: inline-block;
+    margin: 0.25em;
+    width: 1.5em;
+    height: 1.5em;
+  }
 }

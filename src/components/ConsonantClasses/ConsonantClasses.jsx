@@ -19,7 +19,7 @@ const ConsonantClasses = (props) => {
   const {
     confusions,
     initializeConsonants,
-  //   initializeTones,
+    //   initializeTones,
   } = props;
 
   useEffect(() => {

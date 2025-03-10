@@ -1,49 +1,51 @@
 @use 'constants';
 
 .confusion {
-    @include constants.section();
-    text-align: center;
-    nav {
-        @include constants.tab-header;
+  @include constants.section();
+  text-align: center;
+  nav {
+    @include constants.tab-header;
 
-        li { font-size: 1.5em; }
+    li {
+      font-size: 1.5em;
     }
+  }
 
-    .characters {
-        margin: 3rem 0;
+  .characters {
+    margin: 3rem 0;
 
-        div {
-            display: flex;
-            width: 100%;
-            justify-content: center;
+    div {
+      display: flex;
+      width: 100%;
+      justify-content: center;
 
-            @include constants.columns();
-        }
-        span {
-            font-size: 2em;
-            text-align: left;
-
-            &:nth-child(1) {
-                @include constants.column(1);
-            }
-            &:nth-child(2) {
-                @include constants.column(2);
-            }
-            &:nth-child(3) {
-                @include constants.column(2);
-            }
-            &:nth-child(4) {
-                @include constants.column(2);
-                text-align: center;
-            }
-        }
+      @include constants.columns();
     }
-    .drill-button {
-        @include constants.medium-button(constants.$primary-theme);
+    span {
+      font-size: 2em;
+      text-align: left;
 
-        span {
-            margin-right: -.5em;
-            margin-left: .5em;
-        }
+      &:nth-child(1) {
+        @include constants.column(1);
+      }
+      &:nth-child(2) {
+        @include constants.column(2);
+      }
+      &:nth-child(3) {
+        @include constants.column(2);
+      }
+      &:nth-child(4) {
+        @include constants.column(2);
+        text-align: center;
+      }
     }
+  }
+  .drill-button {
+    @include constants.medium-button(constants.$primary-theme);
+
+    span {
+      margin-right: -0.5em;
+      margin-left: 0.5em;
+    }
+  }
 }

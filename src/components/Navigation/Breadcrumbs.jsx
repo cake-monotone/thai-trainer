@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import BreadcrumbsItem from './BreadcrumbsItem';
-import urlToTitleMap from './urlToTitleMap.json'
+import urlToTitleMap from './urlToTitleMap.json';
 
 const urlToTitle = (url) => urlToTitleMap[url] || null;
 

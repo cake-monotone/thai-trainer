@@ -1,109 +1,109 @@
 @use 'constants';
 .practice {
-    @include constants.section();
+  @include constants.section();
 
-    @include constants.forHandheld() {
-        font-size: .8rem;
+  @include constants.forHandheld() {
+    font-size: 0.8rem;
+  }
+  .test-button {
+    @include constants.button();
+
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    z-index: 1;
+
+    .icon {
+      display: inline-block;
+      padding-left: 0.5em;
+      margin-right: -0.5em;
     }
-    .test-button {
-        @include constants.button();
+  }
+  .preview {
+    @include constants.contents-centered();
 
-        position: absolute;
-        right: 1em;
-        top: 1em;
-        z-index: 1;
-
-        .icon {
-            display: inline-block;
-            padding-left: .5em;
-            margin-right: -.5em;
-        }
+    section {
+      @include constants.section();
     }
-    .preview {
-        @include constants.contents-centered();
 
-        section {
-            @include constants.section();
-        }
-
-        .start-button {
-            @include constants.large-button(constants.$primary-theme);
-            width: 50%;
-            margin: 0 1em 1em 1em;
-        }
+    .start-button {
+      @include constants.large-button(constants.$primary-theme);
+      width: 50%;
+      margin: 0 1em 1em 1em;
     }
-    .cards {
-        position: absolute;
-        left:0;
-        top:3em;
-        width: 100%;
+  }
+  .cards {
+    position: absolute;
+    left: 0;
+    top: 3em;
+    width: 100%;
 
-        .card {
-            width: 50%;
-            margin-left: 25%;
-            margin-top: 15%;
-        }
-    }
     .card {
-        background-color: transparent;
-        border-radius: .25em;
-        cursor: pointer;
-        font-size: 4em;
-        padding-top: .5em;
-        position: absolute;
-        text-align: center;
-        transition: opacity .3s;
+      width: 50%;
+      margin-left: 25%;
+      margin-top: 15%;
+    }
+  }
+  .card {
+    background-color: transparent;
+    border-radius: 0.25em;
+    cursor: pointer;
+    font-size: 4em;
+    padding-top: 0.5em;
+    position: absolute;
+    text-align: center;
+    transition: opacity 0.3s;
 
-        > div {
-            transition: opacity .3s;
-            opacity: 0;
-            padding-bottom: .5em;
+    > div {
+      transition: opacity 0.3s;
+      opacity: 0;
+      padding-bottom: 0.5em;
 
-            &.visible {
-                opacity: 1
-            }
+      &.visible {
+        opacity: 1;
+      }
 
-            &.pronunciation {
-                font-size: .8em;
-            }
-            &.term {
-                font-size: .6em;
-            }
-        }
-        button {
-            font-size: .4em;
-            vertical-align: top;
-            margin-top: .4em;
-        }
+      &.pronunciation {
+        font-size: 0.8em;
+      }
+      &.term {
+        font-size: 0.6em;
+      }
     }
-    .card-exit {
-        opacity: 0;
+    button {
+      font-size: 0.4em;
+      vertical-align: top;
+      margin-top: 0.4em;
     }
-    .next-button {
-        border: .1em solid constants.$color-faint;
-        border-radius: 1em;
-        color: constants.$color-muted;
-        display: inline-block;
-        font-size: .75em;
-        height: 1em;
-        width: 1em;
+  }
+  .card-exit {
+    opacity: 0;
+  }
+  .next-button {
+    border: 0.1em solid constants.$color-faint;
+    border-radius: 1em;
+    color: constants.$color-muted;
+    display: inline-block;
+    font-size: 0.75em;
+    height: 1em;
+    width: 1em;
 
-        @include constants.forDesktop {
-            display: none;
-        }
+    @include constants.forDesktop {
+      display: none;
     }
-    .help-button {
-        @include constants.icon-button();
-        position: absolute;
-        z-index: 1;
-        display: none !important;
+  }
+  .help-button {
+    @include constants.icon-button();
+    position: absolute;
+    z-index: 1;
+    display: none !important;
+  }
+  .hint {
+    @include constants.forHandheld {
+      display: none;
     }
-    .hint {
-        @include constants.forHandheld {
-            display: none;
-        }
-    }
-    table button {
-        margin-right: 1em;
-    }
+  }
+  table button {
+    margin-right: 1em;
+  }
 }

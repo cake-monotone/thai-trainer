@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import urlToTitleMap from './urlToTitleMap.json'
+import urlToTitleMap from './urlToTitleMap.json';
 
 const urlToTitle = (url) => urlToTitleMap[url] || null;
 

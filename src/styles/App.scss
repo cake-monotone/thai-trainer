@@ -1,84 +1,99 @@
-@use "reset";
+@use 'reset';
 @use 'font';
 @use 'constants';
 
 button {
-    @include constants.button();
+  @include constants.button();
 }
-h1, h2, h3 {
-    text-align: center;
-    font-weight: 500;
+h1,
+h2,
+h3 {
+  text-align: center;
+  font-weight: 500;
 }
 h1 {
-    @include constants.h1();
+  @include constants.h1();
 }
 h2 {
-    @include constants.h2();
+  @include constants.h2();
 }
 p {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 aside {
-    color: constants.$color-muted; 
-    text-align: center;
+  color: constants.$color-muted;
+  text-align: center;
 }
 .breadcrumbs {
-    position: absolute;
-    padding: .5em;
-    z-index: 1;
-    li { display: inline-block; }
+  position: absolute;
+  padding: 0.5em;
+  z-index: 1;
+  li {
+    display: inline-block;
+  }
 
-    a {
-        display: inline-block;
-        padding-right: .5em;
-        text-decoration: none;
-        color: constants.$color-primary-2;
+  a {
+    display: inline-block;
+    padding-right: 0.5em;
+    text-decoration: none;
+    color: constants.$color-primary-2;
 
-        &:hover { color: constants.$color-primary-1; }
+    &:hover {
+      color: constants.$color-primary-1;
     }
+  }
 }
-.tc_low { color: constants.$tc_low; }
-.tc_mid { color: constants.$tc_mid; }
-.tc_high { color: constants.$tc_high; }
-.tc_none { color: constants.$tc_none; }
+.tc_low {
+  color: constants.$tc_low;
+}
+.tc_mid {
+  color: constants.$tc_mid;
+}
+.tc_high {
+  color: constants.$tc_high;
+}
+.tc_none {
+  color: constants.$tc_none;
+}
 .modal {
-    background-color: rgba(black, 0.4);
+  background-color: rgba(black, 0.4);
+  bottom: 0;
+  display: none;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 3;
+  justify-content: center;
+  align-items: center;
+
+  &.visible {
+    display: flex;
+  }
+
+  .fg {
+    background-color: white;
+    border-radius: 0.4em;
+    border: 1px solid constants.$color-muted;
+    box-shadow: 0.2em 0.2em 0.2em rgba(black, 0.3);
+    padding: 2em;
+    text-align: center;
+    max-width: 90%;
+    width: 20em;
+    margin: 0 1em;
+  }
+  .bg {
     bottom: 0;
-    display: none;
     left: 0;
-    position: fixed;
+    position: absolute;
     right: 0;
     top: 0;
-    z-index: 3;
-    justify-content: center;
-    align-items: center;
-
-
-    &.visible { display: flex; }
-
-    .fg {
-        background-color: white;
-        border-radius: .4em;
-        border: 1px solid constants.$color-muted;
-        box-shadow: .2em .2em .2em rgba(black, .3);
-        padding: 2em;
-        text-align: center;
-        max-width: 90%;
-        width: 20em;
-        margin: 0 1em;
-    }
-    .bg {
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    button {
-        margin: 1em .2em 0;
-    }
-    .danger {
-        background-color: constants.$color-danger;
-        color: white;
-    }
+  }
+  button {
+    margin: 1em 0.2em 0;
+  }
+  .danger {
+    background-color: constants.$color-danger;
+    color: white;
+  }
 }

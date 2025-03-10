@@ -37,7 +37,7 @@ export default class DragDropSorter extends Component {
     const children = moveArrayItem(
       this.props.order,
       source.index,
-      destination.index
+      destination.index,
     );
     this.setState({ children });
   }
@@ -63,7 +63,7 @@ export default class DragDropSorter extends Component {
                       {...provided.dragHandleProps}
                       style={getItemStyle(
                         snapshot.isDragging,
-                        provided.draggableProps.style
+                        provided.draggableProps.style,
                       )}
                     >
                       {childOrder}
