@@ -3,7 +3,7 @@
   "description": "A assistant for learning written Thai",
   "version": "0.2.0",
   "private": true,
-  "homepage": "https://thai.fatfx.com/",
+  "homepage": "https://read-thai.vercel.app/",
   "license": "MIT",
   "type": "module",
   "scripts": {
