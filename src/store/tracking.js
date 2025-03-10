@@ -119,7 +119,7 @@ const eventsMap = {
 
 export const middleware = createMiddleware(
   eventsMap,
-  GoogleAnalyticsGtag('UA-124762758-1'),
+  GoogleAnalyticsGtag('G-KD5ZLLQCSG'),
   {
     /*logger*/
   },
