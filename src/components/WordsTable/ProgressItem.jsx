@@ -11,7 +11,7 @@ const ProgressItem = ({ word, pronunciationType, showProgress }) => {
 
     return <tr>
         <td>{ term }</td>
-        <td>{ thai }</td>
+        <td className='thai-font'>{ thai }</td>
         <td><PlayButton word={word} /> { getPronunciation(ipa, paiboon, pronunciationType) }</td>
         { showProgress ? <td className="progress-icons"><ProgressIcon progress={Math.min(...aspectScores) / 5} /></td> : null }
     </tr>;

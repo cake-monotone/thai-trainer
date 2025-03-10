@@ -6,7 +6,7 @@ const getCharacterClass = memoize((highlightedCharacters, character) => highligh
 
 const ReviewCharacter = ({ character, highlight, highlightedCharacters }) => {
     const className = getCharacterClass(highlightedCharacters, character);
-    return <div className={className} onMouseOver={ () => highlight(character) } onMouseOut={ () => highlight(null)} key={ character }>{ character }</div>;
+    return <div className={`thai-font ${className}`} onMouseOver={ () => highlight(character) } onMouseOut={ () => highlight(null)} key={ character }>{ character }</div>;
 };
 
 ReviewCharacter.propTypes = {

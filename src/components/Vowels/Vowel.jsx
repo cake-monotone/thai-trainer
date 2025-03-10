@@ -8,7 +8,7 @@ const Vowel = ({ vowel, pronunciationType, onNext, onPrev  }) => {
     return <Fragment>
         <div><div className="prev navigation-button" onClick={ () => onPrev(vowel) } title="Previous (←)">〈</div></div>
         <div className="main-content">
-            <h1>{ vowel.vowel }</h1>
+            <h1 className='thai-font'>{ vowel.vowel }</h1>
             <h2>{ pronunciationType === PRONUNCIATIONTYPE_IPA ? vowel.ipa : vowel.paiboon } <PlayButton word={{thai: vowel.vowel}} /></h2>
             <Examples examples={ vowel.examples } />
         </div>

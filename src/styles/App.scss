@@ -1,4 +1,5 @@
 @use "reset";
+@use 'font';
 @use 'constants';
 
 button {
@@ -6,8 +7,7 @@ button {
 }
 h1, h2, h3 {
     text-align: center;
-    font-weight: lighter;
-    
+    font-weight: 500;
 }
 h1 {
     @include constants.h1();

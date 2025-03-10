@@ -19,7 +19,7 @@ class Question extends Component {
     render() {
         const { word, property } = this.props;
         if (isPronunciation(property)) return <div className="question">{ word[property] } <PlayButton word={word} /></div>;
-        return <div className="question">{ word[property] }</div>;
+        return <div className="question thai-font">{ word[property] }</div>;
     }
 }
 Question.propTypes = {

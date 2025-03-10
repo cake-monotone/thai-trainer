@@ -75,11 +75,11 @@ class Review extends PureComponent {
             <table className={ tableClasses }>
                 <thead>
                 <tr>
-                        <th></th>
-                        <th>อ่</th>
-                        <th>อ้</th>
-                        <th>อ๊</th>
-                    <th>อ๋</th>
+                    <th></th>
+                    <th className='thai-font'>อ่</th>
+                    <th className='thai-font'>อ้</th>
+                    <th className='thai-font'>อ๊</th>
+                    <th className='thai-font'>อ๋</th>
                 </tr>
                 <tr>
                     <th></th>

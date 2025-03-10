@@ -120,7 +120,7 @@ class Drill extends PureComponent {
 
         return <div className="drill">
             <div className="container">
-                <h1>{word}</h1>
+                <h1 className='thai-font'>{word}</h1>
                 { getAnswer(0, TONE_LOW, 'L') }
                 { getAnswer(1, TONE_HIGH, 'H') }
                 { getAnswer(2, TONE_RISING, 'R') }

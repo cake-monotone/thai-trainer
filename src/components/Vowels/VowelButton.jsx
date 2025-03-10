@@ -13,7 +13,7 @@ class VowelButton extends PureComponent {
     }
     render() {
         const { vowel, visibleVowel } = this.props;
-        return <button className={ vowel === visibleVowel ? 'selected' : null } onClick={ this.onClick }>{vowel.vowel}</button>;
+        return <button className={ `thai-font ${vowel === visibleVowel ? 'selected' : ''}` } onClick={ this.onClick }>{vowel.vowel}</button>;
     }
 }
 

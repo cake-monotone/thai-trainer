@@ -12,7 +12,7 @@ const getClass = (word, selected, correct, isAnswered) => selected === null ? 'a
     : 'answer rejected';
 
 const Answer = ({ word, property, onSelect, selected, correct, isAnswered }) => <div className={ getClass(word, selected, correct, isAnswered) } onClick={ onSelect }>
-    <span className={ property }>{ word[property] }</span>
+    <span className={ `${property} ${!isPronunciation(property) ? 'thai-font':''}` }>{ word[property] }</span>
     { isPronunciation(property) ? <span className="play-button"><PlayButton word={word} /></span> : null }
 </div>;
 

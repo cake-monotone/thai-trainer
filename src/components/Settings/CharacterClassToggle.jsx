@@ -10,7 +10,7 @@ const CharacterClassToggle = ({ onToggle, showCharacterClasses }) => <div>
         <div onClick={ showCharacterClasses ? onToggle : null } className={`toggle-header ${ !showCharacterClasses ? 'selected' : ''}`}>No color</div>
     </div>
     <div>
-        <h3>
+        <h3 className='thai-font'>
             { showCharacterClasses ? <Thai word={{ thai: 'หยำเป' }} /> : 'หยำเป'}
         </h3>
     </div>

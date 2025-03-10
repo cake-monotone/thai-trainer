@@ -15,7 +15,7 @@ const ConsonantList = ({ consonantKeys, consonants, visibleConsonantKey, pronunc
         .map(({character, consonant: [,,ipa, paiboon, thai]}) => <div key={ character }>
             <span><ColorizedThai word={{ thai: character }} /></span>
             <span>{ pronunciationType === PRONUNCIATIONTYPE_IPA ? ipa : paiboon }</span>
-            <span>{ thai }</span>
+            <span className='thai-font'>{ thai }</span>
             <span><PlayButton word={{ thai }} /></span>
         </div>);
 

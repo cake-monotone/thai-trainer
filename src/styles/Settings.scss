@@ -35,6 +35,38 @@
         @include constants.contents-centered();
     }
 
+    .font-selector {
+        margin-bottom: 3em;
+        &:last-child { margin-bottom: 0; }
+
+        button {
+            @include constants.button();
+            border-radius: .2em;
+            margin: 10px;
+            padding: 20px;
+            font-size: 30px;
+    
+            &.selected {
+                @include constants.customize-button(constants.$primary-theme);
+                cursor: default;
+            }
+        }
+
+        .example-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+        }
+
+        .example-container span {
+            font-size: 1.4rem; 
+        }
+    }
+    .fonts {
+        @include constants.contents-centered();
+    }
+
     .practice-order {
         text-align: center;
 

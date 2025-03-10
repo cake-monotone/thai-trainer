@@ -7,6 +7,8 @@ import PracticeOrderSelector from './PracticeOrderSelector';
 import RangedNumberSelector from './RangedNumberSelector';
 import CharacterClassToggle from './CharacterClassToggle';
 import ResetProgress from './ResetProgress';
+import ThaiFontSelector from './ThaiFontSelector';
+import { AVAILABLE_THAI_FONTS } from '../../services/ThaiFonts';
 
 const Settings = (props) => {
     const {
@@ -14,6 +16,7 @@ const Settings = (props) => {
         rate,
         thaiVoice,
         thaiVoices,
+        thaiFont,
         englishVoice,
         englishVoices,
         words,
@@ -24,6 +27,7 @@ const Settings = (props) => {
         showCharacterClasses,
         resetProgressVisible,
 
+        setThaiFont,
         changePracticeDisplayOrder,
         changePronunciationType,
         changePracticeWordLimit,
@@ -44,6 +48,9 @@ const Settings = (props) => {
             <aside>If you see no voices above, try reloading the page now. That usually solves the problem.</aside>
             <aside>Don&apos;t see a Thai voice? Try googling on how to install <strong>Thai voice support</strong> on your specific device.</aside>
             <aside>Android users may see multiple available voices, when only one is ever used. I don&apos;t know why this happens or how to fix it.</aside>
+        </section>
+        <section>
+            <ThaiFontSelector heading="Thai Fonts" fonts={AVAILABLE_THAI_FONTS} selectedFont={thaiFont} onSelectFont={setThaiFont} />
         </section>
         <section>
             <RateSelector value={ rate } onChange={setRate} />
@@ -84,6 +91,7 @@ Settings.propTypes = {
     englishVoice: voicePropType,
     thaiVoices: PropTypes.arrayOf(voicePropType).isRequired,
     englishVoices: PropTypes.arrayOf(voicePropType).isRequired,
+    thaiFont: PropTypes.string,
     words: PropTypes.arrayOf(PropTypes.shape({
         thai: PropTypes.string.isRequired,
         ipa: PropTypes.string.isRequired,
@@ -92,6 +100,7 @@ Settings.propTypes = {
     showCharacterClasses: PropTypes.bool.isRequired,
     resetProgressVisible: PropTypes.bool.isRequired,
 
+    setThaiFont: PropTypes.func.isRequired,
     changePracticeDisplayOrder: PropTypes.func.isRequired,
     changePronunciationType: PropTypes.func.isRequired,
     changePracticeWordLimit: PropTypes.func.isRequired,

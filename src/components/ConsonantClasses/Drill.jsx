@@ -131,7 +131,7 @@ class Drill extends Component {
 
         return <div className="drill">
             <div className="container">
-                <h1>{character}</h1>
+                <h1 className='thai-font'>{character}</h1>
                 { getAnswer(0) }
                 { getAnswer(1) }
                 { type === 'all' ? getAnswer(2) : null }

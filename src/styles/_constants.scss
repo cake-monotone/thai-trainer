@@ -213,6 +213,9 @@ $primary-theme: (
 }
 
 @mixin button-group($minWidth: 768px) {
+    margin-bottom: 1rem;
+    vertical-align: baseline;
+
     @media(min-width: $minWidth) {
         display: flex;
         flex-wrap: wrap;
@@ -225,8 +228,6 @@ $primary-theme: (
             &:last-child { border-radius: 0 .25rem .25rem 0; }
         }
     }
-    margin-bottom: 1rem;
-    vertical-align: baseline;
     
     > * {
         @include button();
@@ -256,7 +257,7 @@ $primary-theme: (
 
 @mixin heading() {
     text-align: center;
-    font-weight: lighter;
+    font-weight: 500;
     color: $black;
 	line-height: 1.125;
 

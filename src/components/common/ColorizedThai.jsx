@@ -7,7 +7,7 @@ const getClassName = classIndex => classIndex === TONE_CLASS_LOW ? 'tc_low' :
     classIndex === TONE_CLASS_HIGH ? 'tc_high' :
     'tc_none';
 
-    const buildComponents = parts => parts.map(([component, className], index) => <span key={index} className={ getClassName(className) }>{ component }</span>);
+    const buildComponents = parts => parts.map(([component, className], index) => <span key={index} className={ `thai-font ${getClassName(className)}` }>{ component }</span>);
 
 const Thai = ({word}) => <Fragment>
     { buildComponents(getCachedCompents(word.thai)) }

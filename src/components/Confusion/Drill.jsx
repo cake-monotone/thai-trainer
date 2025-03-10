@@ -145,7 +145,7 @@ class Drill extends PureComponent {
     const card = (
       <CSSTransition key={currentIndex} timeout={500} classNames="card">
         <div>
-          <h1>{currentConsonant.char}</h1>
+          <h1 className='thai-font'>{currentConsonant.char}</h1>
           {answers}
         </div>
       </CSSTransition>

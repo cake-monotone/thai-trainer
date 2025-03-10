@@ -1,5 +1,7 @@
 import localforage from 'localforage';
 
+const THAI_FONT_CSS_VAR = '--thai-font';
+
 export const init = () => {
     localforage.config({
         name: 'thai2',
@@ -48,12 +50,16 @@ export const saveVoices = async (voiceSettings) => {
 export const loadSettings = async () => {
     let settings = await localforage.getItem('settings');
     let { pronunciationType, practiceWordLimit, testingWordLimit, practiceOrder, practiceAllAtOnce, showCharacterClasses } = settings || {};
+    if (settings?.thaiFont) {
+        document.querySelector(':root').style.setProperty(THAI_FONT_CSS_VAR, settings.thaiFont);
+    }
     return { pronunciationType, practiceWordLimit, testingWordLimit, practiceOrder, practiceAllAtOnce, showCharacterClasses };
 };
 
 export const saveSettings = async (settings) => {
     let existingSettings = await localforage.getItem('settings');
     await localforage.setItem('settings', { ...existingSettings, ...settings });
+    document.querySelector(':root').style.setProperty(THAI_FONT_CSS_VAR, settings.thaiFont);
 };
 
 export const loadTones = async () => {

@@ -8,9 +8,9 @@ const ConfusionDetail = ({confusions, visibleConfusion, consonants, pronunciatio
     const confusedConsonants = confusions[visibleConfusion]
         .map(character => ({ character, consonants: consonants[character]}))
         .map((({character, consonants: [,,ipa,paiboon,thai]}) => <div key={ character }>
-            <span>{ character }</span>
+            <span className='thai-font'>{ character }</span>
             <span>{ pronunciationType === PRONUNCIATIONTYPE_IPA ? ipa : paiboon }</span>
-            <span>{ thai }</span>
+            <span className='thai-font'>{ thai }</span>
             <span><PlayButton word={{ thai }} /></span>
         </div>));
 

@@ -1,4 +1,5 @@
 import { loadSettings, saveSettings, resetProgressData, } from '../services/Persistence';
+import { NOTO_SANS_THAI_LOOPED } from '../services/ThaiFonts';
 import { PRONUNCIATIONTYPE_IPA, PRONUNCIATIONTYPE_PAIBOON } from '../services/WordManager';
 
 export const SETTINGS_INITIALIZE = 'settings/initialize';
@@ -7,6 +8,7 @@ export const SETTINGS_SETPRACTICELIMIT = 'settings/setpracticelimit';
 export const SETTINGS_SETTESTLIMIT = 'settings/settestlimit';
 export const SETTINGS_SETPRACTICEDISPLAYORDER = 'settings/setpracticedisplayorder';
 export const SETTINGS_RESETPROGRESS = 'settings/resetprogress';
+export const SETTINGS_SETTHAIFONT = 'settings/setthaifont';
 const SETTINGS_TOGGLEALLATONCE = 'settings/toggleallatonce';
 const SETTINGS_TOGGLECHARACTERCLASSES = 'settings/togglecharacterclasses';
 const SETTINGS_TOGGLERESETPROGRESS = 'settings/toggleresetprogress';
@@ -19,6 +21,7 @@ const defaultState = {
     practiceAllAtOnce: false,
     showCharacterClasses: true,
     resetProgressVisible: false,
+    thaiFont: NOTO_SANS_THAI_LOOPED,
 };
 
 export const reducer = (state=defaultState, { type, payload }) => {
@@ -31,6 +34,7 @@ export const reducer = (state=defaultState, { type, payload }) => {
         case SETTINGS_TOGGLECHARACTERCLASSES:
         case SETTINGS_TOGGLERESETPROGRESS:
         case SETTINGS_RESETPROGRESS:
+        case SETTINGS_SETTHAIFONT:
         return { ...state, ...payload };
 
         case SETTINGS_SETPRONUNCIATIONTYPE:
@@ -87,6 +91,10 @@ const resetProgress = () => async dispatch => {
     await resetProgressData();
     dispatch({ type: SETTINGS_RESETPROGRESS, payload: { resetProgressVisible: false }});
 };
+const setThaiFont = thaiFont => dispatch => {
+  dispatch({ type: SETTINGS_SETTHAIFONT, payload: { thaiFont }});
+  saveSettings({ thaiFont });
+}
 
 export const operations = {
     changePracticeDisplayOrder,
@@ -97,4 +105,5 @@ export const operations = {
     toggleCharacterClasses,
     toggleResetProgress,
     resetProgress,
+    setThaiFont,
 };
