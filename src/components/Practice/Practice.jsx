@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 import Preview from './Preview';
@@ -9,9 +9,14 @@ const Practice = (props) => {
   const { type } = useParams();
   const subview = type || null;
 
+  const hasInitialized = useRef(false);
+
   useEffect(() => {
-    seedPractice(words, practiceWordLimit);
-  });
+    if (!hasInitialized.current) {
+      seedPractice(words, practiceWordLimit);
+      hasInitialized.current = true;
+    }
+  }, [words, seedPractice, practiceWordLimit]);
 
   useEffect(() => {
     return () => {
